@@ -1,0 +1,6 @@
+@DP_manager_API_HostAddress = http://localhost:5217
+
+GET {{DP_manager_API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
