@@ -13,9 +13,7 @@ public class StockController : GraphController
     {
         return new Plant()
         {
-            Jaar = 3,
-            Pm = 1,
-            SoortCode = "Vanilla"
+            
         };
     }
 }

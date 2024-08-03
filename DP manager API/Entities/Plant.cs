@@ -2,8 +2,6 @@
 {
     public class Plant
     {
-        public int Jaar { get; set; }
-        public string SoortCode { get; set; }
-        public UInt16 Pm { get; set; }
+        public string Code { get; set; }
     }
 }
