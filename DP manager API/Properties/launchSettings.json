@@ -21,13 +21,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "Import": {
-      "commandName": "Project",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Project",
-        "IMPORTFILE": "C:\\Users\\Kobe\\Documents\\_School\\BP\\ko\\TrimmedData.xlsx"
-      }
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",

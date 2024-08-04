@@ -12,6 +12,11 @@ public static class DotEnv
         return variables.Contains(name);
     }
 
+    public static string GetVariable(string name)
+    {
+        return Environment.GetEnvironmentVariable(name);
+    }
+
     public static void Load(string filePath)
     {
         if (!File.Exists(filePath))

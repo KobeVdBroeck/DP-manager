@@ -1,10 +1,14 @@
-﻿namespace DP_manager_API.Entities
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DP_manager_API.Entities
 {
+    [Keyless]
     public class StockEntry
     {
         public int Id { get; set; }
         public string Worker { get; set; }
         public string Week { get; set; }
+        public string Lab { get; set; }
         public string Location { get; set; }
         public int Recipients { get; set; }
         public int Ppr { get; set; }
