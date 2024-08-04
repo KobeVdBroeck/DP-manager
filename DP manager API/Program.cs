@@ -1,6 +1,7 @@
 using DP_manager_API.Configuration;
 using DP_manager_API.Data;
 using GraphQL.AspNet.Configuration;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,22 +13,23 @@ if (!DotEnv.HasVariable("CONNECTION"))
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddGraphQL();
-builder.Services.AddPostgresDatabase(Environment.GetEnvironmentVariable("CONNECTION"));
+builder.Services.AddPostgresDatabase(DotEnv.GetVariable("CONNECTION"));
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-
 app.UseGraphQL();
 app.MapControllers();
 
-if (args.Contains("import"))
-    XlsxImport.ImportCurrentStock("");
+if (DotEnv.HasVariable("IMPORT"))
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        new XlsxImport(dbInitializer).ImportStock(DotEnv.GetVariable("IMPORT"), DotEnv.GetVariable("IMPORTTARGET"));
+    }
 
 app.Run();

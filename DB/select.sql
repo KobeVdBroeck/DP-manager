@@ -1,3 +1,4 @@
-
-SELECT *, 'Not archived' FROM "Stock"."CurrentStock" UNION ALL 
-SELECT * FROM "Stock"."ArchivedStock" ;
+SELECT * FROM "Plant";
+SELECT * FROM "Medium";
+SELECT * FROM "ArchivedStock";
+SELECT * FROM "CurrentStock";

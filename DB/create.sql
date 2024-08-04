@@ -3,75 +3,74 @@
 BEGIN;
 
 
-ALTER TABLE IF EXISTS "Stock"."CurrentStock" DROP CONSTRAINT IF EXISTS None;
+ALTER TABLE IF EXISTS "CurrentStock" DROP CONSTRAINT IF EXISTS None;
 
-ALTER TABLE IF EXISTS "Stock"."ArchivedStock" DROP CONSTRAINT IF EXISTS None;
+ALTER TABLE IF EXISTS "ArchivedStock" DROP CONSTRAINT IF EXISTS None;
 
 
 
-DROP TABLE IF EXISTS "Stock"."CurrentStock";
+DROP TABLE IF EXISTS "ArchivedStock";
+DROP TABLE IF EXISTS "CurrentStock";
+DROP TABLE IF EXISTS "Plant";
+DROP TABLE IF EXISTS "Medium";
 
-CREATE TABLE IF NOT EXISTS "Stock"."CurrentStock"
+CREATE TABLE IF NOT EXISTS "CurrentStock"
 (
-    "Id" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
+    "Id" integer GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
     "Worker" character varying(5) DEFAULT null,
     "Week" character varying(4) NOT NULL,
+    "Lab" character varying(10) NOT NULL,
     "Location" character varying(20) DEFAULT null,
     "Recipients" integer,
-    "PPR" integer NOT NULL DEFAULT 1,
+    "Ppr" integer NOT NULL DEFAULT 1,
     "Category" integer,
     "Phase" integer,
     "Health" integer,
     "History" text NOT NULL,
     "Remarks" text,
-    "Plant_code" character varying(10) NOT NULL,
-    "Medium_id" integer NOT NULL,
+    "PlantCode" character varying(10) NOT NULL,
+    "MediumId" integer NOT NULL,
     PRIMARY KEY ("Id")
 );
 
-DROP TABLE IF EXISTS "Stock"."ArchivedStock";
-
-CREATE TABLE IF NOT EXISTS "Stock"."ArchivedStock"
+CREATE TABLE IF NOT EXISTS "ArchivedStock"
 (
+    "Id" integer GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
     "Reason" character varying(20) NOT NULL
-) INHERITS ("Stock"."CurrentStock");
+) INHERITS ("CurrentStock");
 
-COMMENT ON COLUMN "Stock"."CurrentStock"."Worker"
+COMMENT ON COLUMN "CurrentStock"."Worker"
     IS 'Null = extern';
 
-COMMENT ON COLUMN "Stock"."CurrentStock"."PPR"
+COMMENT ON COLUMN "CurrentStock"."Ppr"
     IS 'Plants Per Recipient';
 
-DROP TABLE IF EXISTS "Stock"."Plant";
-
-CREATE TABLE IF NOT EXISTS "Stock"."Plant"
+CREATE TABLE IF NOT EXISTS "Plant"
 (
     "Code" character varying(10) NOT NULL,
     PRIMARY KEY ("Code")
 );
 
-DROP TABLE IF EXISTS "Stock"."Medium";
-
-CREATE TABLE IF NOT EXISTS "Stock"."Medium"
+CREATE TABLE IF NOT EXISTS "Medium"
 (
-    "Id" integer NOT NULL,
+    "Id" integer,
     "Description" text,
     PRIMARY KEY ("Id")
 );
 
-ALTER TABLE IF EXISTS "Stock"."CurrentStock"
-    ADD FOREIGN KEY ("Plant_code")
-    REFERENCES "Stock"."Plant" ("Code") MATCH SIMPLE
+ALTER TABLE IF EXISTS "CurrentStock"
+    ADD FOREIGN KEY ("PlantCode")
+    REFERENCES "Plant" ("Code") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
-
-ALTER TABLE IF EXISTS "Stock"."CurrentStock"
-    ADD FOREIGN KEY ("Medium_id")
-    REFERENCES "Stock"."Medium" ("Id") MATCH SIMPLE
+ALTER TABLE IF EXISTS "CurrentStock"
+    ADD FOREIGN KEY ("MediumId")
+    REFERENCES "Medium" ("Id") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
     NOT VALID;
 
 END;
+
