@@ -18,6 +18,8 @@ namespace DP_manager_API.Entities
         public string History { get; set; }
         public string Remarks { get; set; }
         public Medium Medium { get; set; }
+        public int MediumId { get; set; }
         public Plant Plant { get; set; }
+        public string PlantCode { get; set; }
     }
 }
