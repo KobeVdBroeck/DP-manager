@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using DP_manager_API.Entities;
+using System.Reflection.Metadata;
 
 namespace DP_manager_API.Data
 {
@@ -30,13 +31,44 @@ namespace DP_manager_API.Data
             modelBuilder.Entity<StockEntry>(builder =>
             {
                 builder.HasKey(s => s.Id);
+                builder.Property(s => s.PlantCode).IsRequired();
+
+                builder.HasOne(s => s.Plant)
+                    .WithMany()
+                    .HasForeignKey(s => s.PlantCode)
+                    .HasPrincipalKey(p => p.Code)
+                    .IsRequired();
+
+                builder.Property(s => s.MediumId).IsRequired();
+                builder.HasOne(m => m.Medium)
+                    .WithMany()
+                    .HasForeignKey(s => s.MediumId)
+                    .HasPrincipalKey(m => m.Id)
+                    .IsRequired();
+
                 builder.ToTable("CurrentStock");
             });
+            
 
             modelBuilder.Entity<ArchiveEntry>().Property(s => s.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<ArchiveEntry>(builder =>
             {
                 builder.HasKey(s => s.Id);
+                builder.Property(s => s.PlantCode).IsRequired();
+
+                builder.HasOne(s => s.Plant)
+                    .WithMany()
+                    .HasForeignKey(s => s.PlantCode)
+                    .HasPrincipalKey(p => p.Code)
+                    .IsRequired();
+
+                builder.Property(s => s.MediumId).IsRequired();
+                builder.HasOne(m => m.Medium)
+                    .WithMany()
+                    .HasForeignKey(s => s.MediumId)
+                    .HasPrincipalKey(m => m.Id)
+                    .IsRequired();
+
                 builder.ToTable("ArchivedStock");
             });
 

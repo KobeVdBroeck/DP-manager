@@ -12,6 +12,7 @@ if (!DotEnv.HasVariable("CONNECTION"))
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddGraphQLLocalQueryCache();
 builder.Services.AddGraphQL();
 builder.Services.AddPostgresDatabase(DotEnv.GetVariable("CONNECTION"));
 
@@ -22,7 +23,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseGraphQL();
+app.UseGraphQL(); 
 app.MapControllers();
 
 if (DotEnv.HasVariable("IMPORT"))
