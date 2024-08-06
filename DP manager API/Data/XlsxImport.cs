@@ -54,7 +54,6 @@ namespace DP_manager_API.Data
                             entry.Recipients = Convert.ToInt32(data.ElementAt(8));
                             entry.Ppr = Convert.ToInt32(data.ElementAt(9));
                             entry.Remarks = (data.ElementAt(10) ?? "").ToString();
-                            entry.History = (data.ElementAt(11) ?? "").ToString();
 
                             var plantCode = data.ElementAt(0).ToString();
                             var plants = appDbContext.PlantEntries.Where(p => p.Code == plantCode);
