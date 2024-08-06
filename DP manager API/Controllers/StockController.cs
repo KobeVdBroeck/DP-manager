@@ -4,7 +4,7 @@ using DP_manager_API.Models;
 using GraphQL.AspNet.Attributes;
 using GraphQL.AspNet.Controllers;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
+using System.Linq.Dynamic.Core;
 
 namespace DP_manager_API.Controllers;
 
@@ -12,46 +12,30 @@ namespace DP_manager_API.Controllers;
 public class StockController(AppDbContext dbContext) : GraphController
 {
     [QueryRoot("stock")]
-    public IEnumerable<StockEntry> RetrieveStockList(FilterModel<StockEntry> filterModel, SortModel<StockEntry> sortModel, int limit = 100, int page = 1)
+    public Entities.PagedResult<StockEntry> RetrieveStockList(FilterModel<StockEntry> filterModel, SortModel<StockEntry> sortModel, int limit = 100, int page = 1)
     {
-        var result = dbContext.StockEntries
-            .Include(s => s.Plant).Include(s => s.Medium)
-            .Skip(limit * (page - 1)).Take(limit);
+        var result = dbContext.StockEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable();
 
         if (sortModel != null)
-        {
-            if (sortModel.Direction == SortDirection.Ascending)
-                result = result.Order(sortModel.BuildSortFunction());
-            else
-                result = result.OrderDescending(sortModel.BuildSortFunction());
-        }
+            result = result.OrderBy(sortModel.FieldName + " " + sortModel.Direction);
 
         if (filterModel != null)
-            return result.Where(filterModel.BuildFilterFunction());
+            return new Entities.PagedResult<StockEntry>(result.Where(filterModel.BuildFilterFunction()), page, limit);
 
-
-        return result;
+        return new Entities.PagedResult<StockEntry>(result, page, limit);
     }
 
     [QueryRoot("archive")]
-    public IEnumerable<StockEntry> RetrieveArchiveList(FilterModel<ArchiveEntry> filterModel, SortModel<ArchiveEntry> sortModel, int limit = 100, int page = 1)
+    public IEnumerable<ArchiveEntry> RetrieveArchiveList(FilterModel<ArchiveEntry> filterModel, SortModel<ArchiveEntry> sortModel, int limit = 100, int page = 1)
     {
-        var result = dbContext.ArchiveEntries
-            .Include(s => s.Plant).Include(s => s.Medium)
-            .Skip(limit * (page - 1)).Take(limit);
+        var result = dbContext.ArchiveEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable();
 
         if (sortModel != null)
-        {
-            if (sortModel.Direction == SortDirection.Ascending)
-                result = result.Order(sortModel.BuildSortFunction());
-            else
-                result = result.OrderDescending(sortModel.BuildSortFunction());
-        }
+            result = result.OrderBy(sortModel.FieldName + " " + sortModel.Direction);
 
         if (filterModel != null)
             return result.Where(filterModel.BuildFilterFunction());
 
-
-        return result;
+        return result.Skip(limit * (page - 1)).Take(limit);
     }
 }
