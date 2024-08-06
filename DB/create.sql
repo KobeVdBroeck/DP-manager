@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS "CurrentStock"
 
 CREATE TABLE IF NOT EXISTS "ArchivedStock"
 (
-    "Id" integer GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
+    "Id" integer PRIMARY KEY NOT NULL,
     "Reason" character varying(20) NOT NULL
 ) INHERITS ("CurrentStock");
 
