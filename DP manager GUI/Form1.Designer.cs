@@ -30,11 +30,12 @@ namespace DP_manager
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pageControl1 = new PageControl(50);
+            this.pageControl1 = new DP_manager.Components.PageControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -77,6 +78,16 @@ namespace DP_manager
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1017, 546);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1023, 552);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Archive";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // pageControl1
             // 
             this.pageControl1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -89,24 +100,15 @@ namespace DP_manager
             this.pageControl1.Size = new System.Drawing.Size(197, 41);
             this.pageControl1.TabIndex = 0;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1023, 552);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Archive";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 581);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Denis-Plants stock manager";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
