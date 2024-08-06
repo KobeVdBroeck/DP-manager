@@ -2,7 +2,6 @@
 using GraphQL;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -12,45 +11,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using GraphQL.Client.Serializer.Newtonsoft;
 using GraphQL.Client.Abstractions;
+using DP_manager.Components;
 
 namespace DP_manager
 {
     public partial class Form1 : Form
     {
+        MyDataGridView dataGridView;
+
         public Form1()
         {
+            this.pageControl1 = new PageControl(50);
             InitializeComponent();
-            ShowQueryResult();
+            dataGridView = new MyDataGridView(pageControl1);
+            tableLayoutPanel1.Controls.Add(dataGridView, 0, 0);
         }
-
-        public async void ShowQueryResult()
-        {
-            var endpoint = new Uri("https://localhost:7241/graphql");
-
-            // Configure the HttpClient
-            var graphQLHttpClientOptions = new GraphQLHttpClientOptions
-            {
-                EndPoint = endpoint,
-                // Optionally, set the HTTP request timeout or other settings
-                
-            };
-
-            var client = new GraphQLHttpClient(graphQLHttpClientOptions, new NewtonsoftJsonSerializer());
-
-            var request = new GraphQLRequest
-            {
-                Query = new GraphQLQuery("query { stock {  jaar  soortCode  pm} }") 
-
-            };
-
-            var response = await client.SendQueryAsync<ResponseData>(request);
-
-            textBox1.Text = response.Data.Stock.SoortCode;
-        }
-        public class ResponseData
-        {
-            public Plant Stock { get; set; }
-        }
-
     }
 }
