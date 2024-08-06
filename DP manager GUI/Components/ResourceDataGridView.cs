@@ -9,16 +9,17 @@ using System.Windows.Forms;
 
 namespace DP_manager.Components
 {
-    internal class MyDataGridView : DataGridView
+    internal class ResourceDataGridView<TController, T> : DataGridView where TController : ResourceController<T> where T : IGrpcResponse
     {
         private BindingSource bindingSource = new BindingSource();
-        private StockController stockController = new StockController();
+        private TController resourceController;
         private PageControl pageControl;
         private string sortDirection = "";
         private int sortedColumn = -1;
 
-        public MyDataGridView(PageControl pageControl) : base()
+        public ResourceDataGridView(PageControl pageControl, TController controller) : base()
         {
+            this.resourceController = controller;
             this.pageControl = pageControl;
 
             Dock = DockStyle.Fill;
@@ -44,7 +45,7 @@ namespace DP_manager.Components
 
         private void PageControl_PageChanged(object sender, EventArgs e)
         {
-            stockController.SetPaging(pageControl.Page, pageControl.PageLimit);
+            resourceController.SetPaging(pageControl.Page, pageControl.PageLimit);
             UpdateData();
         }
 
@@ -52,28 +53,36 @@ namespace DP_manager.Components
         {
             int column = e.ColumnIndex;
 
-            if(column != sortedColumn)
+            
+            if (sortDirection != "")
+            {
+                string curText = Columns[sortedColumn].HeaderText;
+                Columns[sortedColumn].HeaderText = curText.Substring(0, curText.Length - 1);
+            }
+
+            if (column != sortedColumn)
             {
                 sortDirection = "asc";
                 sortedColumn = column;
-                stockController.SetSort(Columns[column].Name, "asc");
+                resourceController.SetSort(Columns[column].Name, "asc");
             }
             else if (sortedColumn < 0)
             {
                 sortDirection = "asc";
                 sortedColumn = column;
-                stockController.SetSort(Columns[column].Name, "asc");
+                resourceController.SetSort(Columns[column].Name, "asc");
             }
             else if(sortDirection == "asc")
             {
                 sortDirection = "desc";
                 sortedColumn = column;
-                stockController.SetSort(Columns[column].Name, "desc");
+                resourceController.SetSort(Columns[column].Name, "desc");
             }
             else
             {
                 sortDirection = "";
                 sortedColumn = -1;
+                resourceController.RemoveSort();
             }
 
             UpdateData();
@@ -81,11 +90,17 @@ namespace DP_manager.Components
 
         public async void UpdateData()
         {
-            var data = await stockController.GetEntries();
-            pageControl.Page = data.Stock.CurrentPage;
-            pageControl.PageCount = data.Stock.PageCount;
-            bindingSource.DataSource = new BindingList<StockEntry>(data.Stock.Result.ToList());
+            var data = await resourceController.GetEntries();
+            var (page, pageCount) = data.GetPageInfo();
+
+            pageControl.Page = page;
+            pageControl.PageCount = pageCount;
+
+            bindingSource.DataSource = new BindingList<object>(data.GetData().Cast<object>().ToList());
             Refresh();
+
+            if (sortDirection != "")
+                Columns[sortedColumn].HeaderText += sortDirection == "asc" ? "▲" : "▼";
         }
 
         private void OnRightMouseClick(object sender, MouseEventArgs e)

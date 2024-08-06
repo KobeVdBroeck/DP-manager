@@ -10,7 +10,7 @@ namespace DP_manager
     {
         private static readonly string STARTQUERY = "query { stock { result { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks }, currentPage, pageCount, totalCount } }";
 
-        public StockController() 
+        public StockController() : base()
         {
             queryBuilder = new QueryBuilder(STARTQUERY, "stock");
             SetSort("Id", "asc");

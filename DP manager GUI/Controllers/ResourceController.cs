@@ -7,6 +7,11 @@ namespace DP_manager
         
         protected QueryBuilder queryBuilder;
 
+        public ResourceController()
+        {
+
+        }
+
         public async Task<TResponse> GetEntries()
         {
             return await GrpcService.GetRequestAsync<TResponse>(queryBuilder.BuildQuery());
