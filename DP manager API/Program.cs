@@ -1,5 +1,7 @@
 using DP_manager_API.Configuration;
+using DP_manager_API.Controllers;
 using DP_manager_API.Data;
+using DP_manager_API.Entities;
 using GraphQL.AspNet.Configuration;
 using Microsoft.Extensions.Hosting;
 

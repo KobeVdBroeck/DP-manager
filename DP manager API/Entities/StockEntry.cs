@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GraphQL.Types;
+using Microsoft.EntityFrameworkCore;
 
 namespace DP_manager_API.Entities
 {
