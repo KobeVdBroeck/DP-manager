@@ -7,8 +7,8 @@ ALTER TABLE IF EXISTS "CurrentStock" DROP CONSTRAINT IF EXISTS None;
 
 ALTER TABLE IF EXISTS "ArchivedStock" DROP CONSTRAINT IF EXISTS None;
 
-
-
+DROP TRIGGER IF EXISTS HIST_TRIGGER_INSERT ON "CurrentStock";
+DROP TRIGGER IF EXISTS ARCHIVE_TRIGGER_INSERT_ON_DELETE ON "CurrentStock";
 DROP TABLE IF EXISTS "ArchivedStock";
 DROP TABLE IF EXISTS "CurrentStock";
 DROP TABLE IF EXISTS "Plant";
@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS "Medium";
 
 CREATE TABLE IF NOT EXISTS "CurrentStock"
 (
-    "Id" integer GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
+    "Id" integer UNIQUE GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
     "Worker" character varying(5) DEFAULT null,
     "Week" character varying(4) NOT NULL,
     "Lab" character varying(10) NOT NULL,
@@ -35,9 +35,23 @@ CREATE TABLE IF NOT EXISTS "CurrentStock"
 
 CREATE TABLE IF NOT EXISTS "ArchivedStock"
 (
-    "Id" integer PRIMARY KEY NOT NULL,
-    "Reason" character varying(20) NOT NULL
-) INHERITS ("CurrentStock");
+    "Id" integer UNIQUE GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
+    "Worker" character varying(5) DEFAULT null,
+    "Week" character varying(4) NOT NULL,
+    "Lab" character varying(10) NOT NULL,
+    "Location" character varying(20) DEFAULT null,
+    "Recipients" integer,
+    "Ppr" integer NOT NULL DEFAULT 1,
+    "Category" integer,
+    "Phase" integer,
+    "Health" integer,
+    "History" text NOT NULL,
+    "Remarks" text,
+    "PlantCode" character varying(10) NOT NULL,
+    "MediumId" integer NOT NULL,
+    "Reason" character varying(20) NOT NULL,
+    PRIMARY KEY ("Id")
+) ;
 
 COMMENT ON COLUMN "CurrentStock"."Worker"
     IS 'Null = extern';

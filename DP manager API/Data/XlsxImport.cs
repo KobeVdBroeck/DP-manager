@@ -22,14 +22,16 @@ namespace DP_manager_API.Data
                 var myWorksheet = xlPackage.Workbook.Worksheets.First();
                 var totalRows = myWorksheet.Dimension.End.Row;
                 var totalColumns = myWorksheet.Dimension.End.Column;
+                int counter = 1;
 
                 for (int rowNum = 2; rowNum <= totalRows; rowNum++)
                 {
+                    bool isArchive = importTarget.ToLower() == "archive" || (importTarget.ToLower() == "both" && rowNum > 101);
                     List<object> data = new();
                     StockEntry entry;
 
-                    if (importTarget.ToLower() == "archive")
-                        entry = new ArchiveEntry() { Reason = "Onbekende reden" };
+                    if (isArchive)
+                        entry = new ArchiveEntry() { Reason = "No reason specified" };
                     else
                         entry = new StockEntry();
 
@@ -82,13 +84,20 @@ namespace DP_manager_API.Data
                             entry.Phase = statusCode[1] - '0';
                             entry.Health = statusCode[2] - '0';
 
-                            if (importTarget.ToLower() == "archive")
+                            if (isArchive)
+                            {
+                                entry.History = counter.ToString() + ";";
                                 appDbContext.ArchiveEntries.Add((ArchiveEntry)entry);
+                            }
                             else
+                            {
+                                entry.History = "";
                                 appDbContext.StockEntries.Add(entry);
+                            }
 
                             appDbContext.SaveChanges();
                             transaction.Commit();
+                            counter++;
                         }
                         catch (Exception ex)
                         {
