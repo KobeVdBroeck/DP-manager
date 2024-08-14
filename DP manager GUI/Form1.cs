@@ -17,14 +17,17 @@ namespace DP_manager
 {
     public partial class Form1 : Form
     {
-        ResourceDataGridView<StockController, StockResponse> dataGridView;
+        ResourceDataGridView<StockResponse, StockEntry> dgv_stock;
+        ResourceDataGridView<StockResponse, StockEntry> dgv_archive;
 
         public Form1()
         {
             this.pageControl1 = new PageControl(50);
             InitializeComponent();
-            dataGridView = new ResourceDataGridView<StockController, StockResponse>(pageControl1, new StockController());
-            tableLayoutPanel1.Controls.Add(dataGridView, 0, 0);
+            dgv_stock = new ResourceDataGridView<StockResponse, StockEntry>(pageControl1, new StockController());
+            dgv_archive = new ResourceDataGridView<StockResponse, StockEntry>(pageControl1, new StockController());
+            tlp_stock.Controls.Add(dgv_stock, 0, 0);
+            tlp_archive.Controls.Add(dgv_archive, 0, 0);
         }
     }
 }

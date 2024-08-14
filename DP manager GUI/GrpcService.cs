@@ -28,7 +28,7 @@ namespace DP_manager
             client = new GraphQLHttpClient(graphQLHttpClientOptions, new NewtonsoftJsonSerializer());
         }
 
-        public static async Task<T> GetRequestAsync<T>(string query)
+        public static async Task<T> SendRequestAsync<T>(string query)
         {
             var request = new GraphQLRequest { Query = new GraphQLQuery(query) };
 

@@ -97,24 +97,43 @@
     <Compile Include="Components\PageControl.Designer.cs">
       <DependentUpon>PageControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entities\IGrpcResponse.cs" />
+    <Compile Include="Components\FormBoundMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\ResourceForm.cs" />
+    <Compile Include="Components\StockContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\StockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\StockForm.Designer.cs">
+      <DependentUpon>StockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ArchiveController.cs" />
+    <Compile Include="Models\IGrpcResponse.cs" />
+    <Compile Include="Models\ArchiveResponse.cs" />
+    <Compile Include="Models\ArchiveEntry.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entities\PagedResponse.cs" />
+    <Compile Include="Models\PagedResponse.cs" />
     <Compile Include="QueryBuilder.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
-    <Compile Include="Entities\StockResponse.cs" />
+    <Compile Include="Models\StockResponse.cs" />
     <Compile Include="Controllers\StockController.cs" />
-    <Compile Include="Entities\StockEntry.cs" />
+    <Compile Include="Models\StockEntry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GrpcService.cs" />
     <EmbeddedResource Include="Components\PageControl.resx">
       <DependentUpon>PageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\StockForm.resx">
+      <DependentUpon>StockForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
