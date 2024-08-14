@@ -1,42 +1,47 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DP_manager
 {
-    public abstract class ResourceController<TResponse>
+    public abstract class ResourceController<TResponse, TEntity>
     {
-        
-        protected QueryBuilder queryBuilder;
+        protected QueryBuilder getQueryBuilder;
+        protected string updateQueryBuilder;
+        protected List<MenuItem> menuItems;
+        public List<MenuItem> MenuItems { get => menuItems; }
 
         public ResourceController()
         {
-
+            menuItems = new List<MenuItem>();
         }
 
         public async Task<TResponse> GetEntries()
         {
-            return await GrpcService.GetRequestAsync<TResponse>(queryBuilder.BuildQuery());
+            return await GrpcService.SendRequestAsync<TResponse>(getQueryBuilder.BuildQuery());
         }
 
         public void RemovePaging()
         {
-            queryBuilder.RemoveArgument("page");
-            queryBuilder.RemoveArgument("limit");
+            getQueryBuilder.RemoveArgument("page");
+            getQueryBuilder.RemoveArgument("limit");
         }
 
         public void RemoveSort()
         {
-            queryBuilder.RemoveArgument("sortModel");
+            getQueryBuilder.RemoveArgument("sortModel");
         }
 
         public void SetPaging(int page, int limit)
         {
-            queryBuilder.AddArgument("page", page.ToString(), true);
-            queryBuilder.AddArgument("limit", limit.ToString(), true);
+            getQueryBuilder.AddArgument("page", page.ToString(), true);
+            getQueryBuilder.AddArgument("limit", limit.ToString(), true);
         }
 
         public void SetSort(string column, string direction)
         {
-            queryBuilder.AddArgument("sortModel", "{ fieldName: \"" + column + "\", direction: \"" + direction + "\" }", true);
+            getQueryBuilder.AddArgument("sortModel", "{ fieldName: \"" + column + "\", direction: \"" + direction + "\" }", true);
         }
     }
 }

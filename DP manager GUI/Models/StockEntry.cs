@@ -17,5 +17,7 @@ namespace DP_manager
         public int Health { get; set; }
         public string History { get; set; }
         public string Remarks { get; set; }
+        public string PlantCode { get; set; }
+        public int MediumId { get; set; }
     }
 }

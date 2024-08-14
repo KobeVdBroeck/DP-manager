@@ -9,15 +9,15 @@ using System.Windows.Forms;
 
 namespace DP_manager.Components
 {
-    internal class ResourceDataGridView<TController, T> : DataGridView where TController : ResourceController<T> where T : IGrpcResponse
+    internal class ResourceDataGridView<TResponse, TEntity> : DataGridView where TResponse : IGrpcResponse
     {
         private BindingSource bindingSource = new BindingSource();
-        private TController resourceController;
+        private ResourceController<TResponse, TEntity> resourceController;
         private PageControl pageControl;
         private string sortDirection = "";
         private int sortedColumn = -1;
 
-        public ResourceDataGridView(PageControl pageControl, TController controller) : base()
+        public ResourceDataGridView(PageControl pageControl, ResourceController<TResponse, TEntity> controller) : base()
         {
             this.resourceController = controller;
             this.pageControl = pageControl;
@@ -109,15 +109,13 @@ namespace DP_manager.Components
             if (e.Button == MouseButtons.Right)
             {
                 ContextMenu m = new ContextMenu();
-                
-                MenuItem item = new MenuItem("Cut");
-                item.Click += Update_Resource_Click;
 
-                m.MenuItems.Add(item);
-
-
-                m.MenuItems.Add(new MenuItem("Copy"));
-                m.MenuItems.Add(new MenuItem("Paste"));
+                m.MenuItems.AddRange(resourceController.MenuItems.ToArray());
+                foreach (var menuItem in m.MenuItems)
+                {
+                    var item = (FormBoundMenuItem) menuItem;
+                    item.Click += Form_Click;
+                }
 
                 int currentMouseOverRow = HitTest(e.X, e.Y).RowIndex;
 
@@ -131,9 +129,30 @@ namespace DP_manager.Components
             }
         }
 
-        private void Update_Resource_Click(object sender, EventArgs e)
+        private void Form_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var count = Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            foreach (var item in SelectedRows)
+            {
+                var index = ((DataGridViewRow) item).Index;
+                var entity = (TEntity) bindingSource[index];
+
+                var formMenuItem = (FormBoundMenuItem) sender;
+                var form = formMenuItem.Form;
+
+                if (form.IsDisposed)
+                    formMenuItem.Form = (ResourceForm) form.Reconstruct();
+
+                formMenuItem.Form.Data = entity;
+                formMenuItem.Form.Show();
+                formMenuItem.Form.Close += Form_Close;
+            }
+        }
+
+        private void Form_Close(object sender, EventArgs e)
+        {
+            UpdateData();
         }
     }
 }

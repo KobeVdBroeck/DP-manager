@@ -33,12 +33,16 @@ namespace DP_manager
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tlp_stock = new System.Windows.Forms.TableLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pageControl1 = new DP_manager.Components.PageControl();
+            this.tlp_archive = new System.Windows.Forms.TableLayoutPanel();
+            this.pageControl2 = new DP_manager.Components.PageControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tlp_stock.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tlp_archive.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -54,7 +58,7 @@ namespace DP_manager
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
+            this.tabPage1.Controls.Add(this.tlp_stock);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -65,21 +69,22 @@ namespace DP_manager
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.pageControl1, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1017, 546);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.tlp_stock.ColumnCount = 2;
+            this.tlp_stock.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_stock.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlp_stock.Controls.Add(this.pageControl1, 0, 1);
+            this.tlp_stock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_stock.Location = new System.Drawing.Point(3, 3);
+            this.tlp_stock.Name = "tableLayoutPanel1";
+            this.tlp_stock.RowCount = 2;
+            this.tlp_stock.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_stock.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlp_stock.Size = new System.Drawing.Size(1017, 546);
+            this.tlp_stock.TabIndex = 1;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.tlp_archive);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -100,6 +105,33 @@ namespace DP_manager
             this.pageControl1.Size = new System.Drawing.Size(197, 41);
             this.pageControl1.TabIndex = 0;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tlp_archive.ColumnCount = 2;
+            this.tlp_archive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_archive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlp_archive.Controls.Add(this.pageControl2, 0, 1);
+            this.tlp_archive.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_archive.Location = new System.Drawing.Point(3, 3);
+            this.tlp_archive.Name = "tableLayoutPanel2";
+            this.tlp_archive.RowCount = 2;
+            this.tlp_archive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_archive.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlp_archive.Size = new System.Drawing.Size(1017, 546);
+            this.tlp_archive.TabIndex = 2;
+            // 
+            // pageControl2
+            // 
+            this.pageControl2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pageControl2.AutoSize = true;
+            this.pageControl2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pageControl2.Location = new System.Drawing.Point(410, 502);
+            this.pageControl2.Name = "pageControl2";
+            this.pageControl2.Page = 1;
+            this.pageControl2.PageCount = 1;
+            this.pageControl2.Size = new System.Drawing.Size(197, 41);
+            this.pageControl2.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -111,8 +143,11 @@ namespace DP_manager
             this.Text = "Denis-Plants stock manager";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tlp_stock.ResumeLayout(false);
+            this.tlp_stock.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tlp_archive.ResumeLayout(false);
+            this.tlp_archive.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -122,8 +157,10 @@ namespace DP_manager
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tlp_stock;
         private Components.PageControl pageControl1;
+        private System.Windows.Forms.TableLayoutPanel tlp_archive;
+        private PageControl pageControl2;
     }
 }
 
