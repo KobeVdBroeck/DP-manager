@@ -8,6 +8,7 @@ namespace DP_manager_API.Entities
         public int CurrentPage { get; set; }
         public int PageCount { get; set; }
         public int TotalCount { get; set; }
+        public int PageLimit { get; set; }
 
         public PagedResult(IEnumerable<T> result, int page, int pageLimit)
         {
@@ -15,6 +16,7 @@ namespace DP_manager_API.Entities
             TotalCount = result.Count();
             PageCount = 1 + (int) Math.Floor((decimal)(TotalCount / pageLimit));
             CurrentPage = page;
+            PageLimit = pageLimit;
         }
     }
 }
