@@ -27,9 +27,10 @@ public class StockController(AppDbContext dbContext) : GraphController
         return new Entities.PagedResult<StockEntry>(result, page, limit);
     }
 
-    [MutationRoot("stock")]
+    [MutationRoot("updateStock")]
     public StockEntry UpdateStockEntry(StockEntry stock, string? reason)
     {
+        // TODO response with both archived and new entry
         var toUpdate = dbContext.StockEntries.Where(s => s.Id == stock.Id).First();
 
         if (toUpdate == null)
@@ -37,13 +38,31 @@ public class StockController(AppDbContext dbContext) : GraphController
 
         dbContext.StockEntries.Remove(toUpdate);
 
-        var archive = toUpdate.Adapt();
+        var archive = toUpdate.Adapt(reason);
         dbContext.ArchiveEntries.Add(archive);
         dbContext.StockEntries.Add(stock.WithoutId(archive.History));
 
         dbContext.SaveChanges();
 
         return dbContext.StockEntries.OrderBy("Id").Last();
+    }
+
+    [MutationRoot("removeStock")]
+    public ArchiveEntry RemoveStockById(int id, string? reason)
+    {
+        var toUpdate = dbContext.StockEntries.Where(s => s.Id == id).First();
+
+        if (toUpdate == null)
+            throw new Exception("Stock entry not found.");
+
+        dbContext.StockEntries.Remove(toUpdate);
+
+        var archive = toUpdate.Adapt(reason);
+        dbContext.ArchiveEntries.Add(archive);
+
+        dbContext.SaveChanges();
+
+        return dbContext.ArchiveEntries.OrderBy("Id").Last();
     }
 
     [QueryRoot("archive")]

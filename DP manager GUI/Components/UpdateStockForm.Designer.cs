@@ -1,6 +1,6 @@
 ﻿namespace DP_manager.Components
 {
-    partial class StockForm
+    partial class UpdateStockForm
     {
         /// <summary>
         /// Required designer variable.
@@ -43,7 +43,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.lb_reason = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_reason = new System.Windows.Forms.TextBox();
+            this.rtb_reason = new System.Windows.Forms.RichTextBox();
             this.tb_worker = new System.Windows.Forms.TextBox();
             this.cb_mediumId = new System.Windows.Forms.ComboBox();
             this.cb_plantCode = new System.Windows.Forms.ComboBox();
@@ -219,7 +219,7 @@
             // lb_reason
             // 
             this.lb_reason.AutoSize = true;
-            this.lb_reason.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lb_reason.Dock = System.Windows.Forms.DockStyle.Top;
             this.lb_reason.Location = new System.Drawing.Point(3, 378);
             this.lb_reason.Margin = new System.Windows.Forms.Padding(3, 7, 3, 0);
             this.lb_reason.Name = "lb_reason";
@@ -234,7 +234,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.tb_reason, 1, 13);
+            this.tableLayoutPanel1.Controls.Add(this.rtb_reason, 1, 13);
             this.tableLayoutPanel1.Controls.Add(this.tb_worker, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label12, 0, 12);
             this.tableLayoutPanel1.Controls.Add(this.label13, 0, 11);
@@ -283,15 +283,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(287, 433);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(287, 435);
             this.tableLayoutPanel1.TabIndex = 32;
             // 
-            // tb_reason
+            // rtb_reason
             // 
-            this.tb_reason.Location = new System.Drawing.Point(133, 374);
-            this.tb_reason.Name = "tb_reason";
-            this.tb_reason.Size = new System.Drawing.Size(146, 22);
-            this.tb_reason.TabIndex = 49;
+            this.rtb_reason.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtb_reason.Location = new System.Drawing.Point(133, 374);
+            this.rtb_reason.Name = "rtb_reason";
+            this.rtb_reason.Size = new System.Drawing.Size(151, 24);
+            this.rtb_reason.TabIndex = 33;
+            this.rtb_reason.Text = "";
+            this.rtb_reason.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtb_reason_ContentsResized);
             // 
             // tb_worker
             // 
@@ -418,7 +421,7 @@
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cancel.Location = new System.Drawing.Point(3, 402);
+            this.btn_cancel.Location = new System.Drawing.Point(3, 404);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(124, 28);
             this.btn_cancel.TabIndex = 51;
@@ -431,7 +434,7 @@
             this.btn_confirm.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_confirm.Location = new System.Drawing.Point(133, 402);
+            this.btn_confirm.Location = new System.Drawing.Point(133, 404);
             this.btn_confirm.Name = "btn_confirm";
             this.btn_confirm.Size = new System.Drawing.Size(151, 28);
             this.btn_confirm.TabIndex = 50;
@@ -439,7 +442,7 @@
             this.btn_confirm.UseVisualStyleBackColor = true;
             this.btn_confirm.Click += new System.EventHandler(this.btn_confirm_Click);
             // 
-            // StockForm
+            // UpdateStockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -447,7 +450,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(773, 540);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "StockForm";
+            this.Name = "UpdateStockForm";
             this.Text = "New stock entry";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -495,10 +498,10 @@
         private System.Windows.Forms.NumericUpDown nud_ppr;
         private System.Windows.Forms.ComboBox cb_plantCode;
         private System.Windows.Forms.ComboBox cb_mediumId;
-        private System.Windows.Forms.TextBox tb_reason;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_confirm;
         private System.Windows.Forms.TextBox tb_history;
+        private System.Windows.Forms.RichTextBox rtb_reason;
     }
 }

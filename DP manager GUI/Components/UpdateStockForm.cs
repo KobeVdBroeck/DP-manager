@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DP_manager.Components
 {
-    public partial class StockForm : Form, ResourceForm
+    public partial class UpdateStockForm : Form, ResourceForm
     {
         StockEntry data;
         public object Data 
@@ -35,7 +35,7 @@ namespace DP_manager.Components
 
         new public bool IsDisposed => base.IsDisposed;
 
-        public StockForm(StockController controller) : base()
+        public UpdateStockForm(StockController controller) : base()
         {
             this.controller = controller;
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace DP_manager.Components
 
         public Form Reconstruct()
         {
-            return new StockForm(controller);
+            return new UpdateStockForm(controller);
         }
 
         event EventHandler<EventArgs> ResourceForm.Close
@@ -79,14 +79,21 @@ namespace DP_manager.Components
             if(data == null) 
             {
                 lb_reason.Enabled = false;
-                tb_reason.Enabled = false;
+                rtb_reason.Enabled = false;
             }
         }
 
         private async void btn_confirm_Click(object sender, EventArgs e)
         {
             if(data != null)
-                await controller.UpdateEntry(data, tb_reason.Text ?? default);
+            {
+                DialogResult result = MessageBox.Show("Confirm submit", "Are you sure you want to update this entry? The original entry will be archived.", MessageBoxButtons.YesNo);
+
+                if(result == DialogResult.No)
+                    return;
+
+                await controller.UpdateEntry(data, rtb_reason.Text ?? default);
+            }
 
             Close();
         }
@@ -94,6 +101,11 @@ namespace DP_manager.Components
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void rtb_reason_ContentsResized(object sender, ContentsResizedEventArgs e)
+        {
+            ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
         }
     }
 }

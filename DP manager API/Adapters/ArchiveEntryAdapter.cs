@@ -4,7 +4,9 @@ namespace DP_manager_API.Adapters
 {
     public static class ArchiveEntryAdapter
     {
-        public static ArchiveEntry Adapt(this StockEntry stock, string reason = "No reason specified")
+        private static readonly string DEFAULT_REASON = "No reason specified";
+
+        public static ArchiveEntry Adapt(this StockEntry stock, string? reason)
         {
             return new ArchiveEntry()
             {
@@ -23,7 +25,7 @@ namespace DP_manager_API.Adapters
                 Remarks = stock.Remarks,
                 Week = stock.Week,
                 Worker = stock.Worker,
-                Reason = reason
+                Reason = reason ?? DEFAULT_REASON,
             };
         }
     }
