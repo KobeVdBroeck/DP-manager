@@ -107,6 +107,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\ResourceForm.cs" />
+    <Compile Include="Components\SetFilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\SetFilterForm.Designer.cs">
+      <DependentUpon>SetFilterForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\UpdateStockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\PageControl.resx">
       <DependentUpon>PageControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\SetFilterForm.resx">
+      <DependentUpon>SetFilterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\UpdateStockForm.resx">
       <DependentUpon>UpdateStockForm.cs</DependentUpon>
