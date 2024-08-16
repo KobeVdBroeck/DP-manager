@@ -13,6 +13,8 @@ namespace DP_manager.Components
         object Controller { get; set; }
 
         bool IsDisposed { get; }
+        bool IsVisible { get; }
+
         Form Reconstruct();
 
         void Show();

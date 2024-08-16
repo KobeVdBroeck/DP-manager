@@ -35,8 +35,8 @@ namespace DP_manager
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tlp_stock = new System.Windows.Forms.TableLayoutPanel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pageControl1 = new DP_manager.Components.PageControl();
             this.tlp_archive = new System.Windows.Forms.TableLayoutPanel();
+            this.pageControl1 = new DP_manager.Components.PageControl();
             this.pageControl2 = new DP_manager.Components.PageControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -49,7 +49,6 @@ namespace DP_manager
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -67,7 +66,7 @@ namespace DP_manager
             this.tabPage1.Text = "Stock";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel1
+            // tlp_stock
             // 
             this.tlp_stock.ColumnCount = 2;
             this.tlp_stock.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -75,7 +74,7 @@ namespace DP_manager
             this.tlp_stock.Controls.Add(this.pageControl1, 0, 1);
             this.tlp_stock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlp_stock.Location = new System.Drawing.Point(3, 3);
-            this.tlp_stock.Name = "tableLayoutPanel1";
+            this.tlp_stock.Name = "tlp_stock";
             this.tlp_stock.RowCount = 2;
             this.tlp_stock.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlp_stock.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -93,6 +92,21 @@ namespace DP_manager
             this.tabPage2.Text = "Archive";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tlp_archive
+            // 
+            this.tlp_archive.ColumnCount = 2;
+            this.tlp_archive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_archive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlp_archive.Controls.Add(this.pageControl2, 0, 1);
+            this.tlp_archive.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_archive.Location = new System.Drawing.Point(3, 3);
+            this.tlp_archive.Name = "tlp_archive";
+            this.tlp_archive.RowCount = 2;
+            this.tlp_archive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_archive.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlp_archive.Size = new System.Drawing.Size(1017, 546);
+            this.tlp_archive.TabIndex = 2;
+            // 
             // pageControl1
             // 
             this.pageControl1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -104,21 +118,6 @@ namespace DP_manager
             this.pageControl1.PageCount = 1;
             this.pageControl1.Size = new System.Drawing.Size(197, 41);
             this.pageControl1.TabIndex = 0;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tlp_archive.ColumnCount = 2;
-            this.tlp_archive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_archive.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlp_archive.Controls.Add(this.pageControl2, 0, 1);
-            this.tlp_archive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlp_archive.Location = new System.Drawing.Point(3, 3);
-            this.tlp_archive.Name = "tableLayoutPanel2";
-            this.tlp_archive.RowCount = 2;
-            this.tlp_archive.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlp_archive.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tlp_archive.Size = new System.Drawing.Size(1017, 546);
-            this.tlp_archive.TabIndex = 2;
             // 
             // pageControl2
             // 

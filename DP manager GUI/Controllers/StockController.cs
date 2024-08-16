@@ -12,7 +12,7 @@ namespace DP_manager
 {
     public class StockController : ResourceController<StockResponse, StockEntry>
     {
-        private static readonly string GETQUERY = "query { stock { result { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks }, currentPage, pageCount, totalCount } }";
+        private static readonly string GETQUERY = "query { stock { result { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks, mediumId, plantCode }, currentPage, pageCount, totalCount } }";
         private static readonly string UPDATEQUERY = "mutation { updateStock( stock: { id: {0}, worker: \"{1}\", week: \"{2}\", lab: \"{3}\", location: \"{4}\", recipients: {5}, ppr: {6}, category: {7}, phase: {8}, health: {9}, history: \"{10}\", remarks: \"{11}\", mediumId: {12}, plantCode: \"{13}\", } , reason: \"{14}\") { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks }  } ";
         private static readonly string REMOVEQUERY = "mutation { removeStock( id: {0} } , reason: \"{1}\") { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks, reason }  } ";
 

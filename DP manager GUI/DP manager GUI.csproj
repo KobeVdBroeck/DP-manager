@@ -107,9 +107,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\ResourceForm.cs" />
-    <Compile Include="Components\StockContextMenu.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Components\UpdateStockForm.cs">
       <SubType>Form</SubType>
     </Compile>

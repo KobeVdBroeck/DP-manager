@@ -141,7 +141,7 @@ namespace DP_manager.Components
                 var formMenuItem = (FormBoundMenuItem) sender;
                 var form = formMenuItem.Form;
 
-                if (form.IsDisposed)
+                if (form.IsDisposed || form.IsVisible)
                     formMenuItem.Form = (ResourceForm) form.Reconstruct();
 
                 formMenuItem.Form.Data = entity;
