@@ -34,6 +34,7 @@ namespace DP_manager.Components
         }
 
         new public bool IsDisposed => base.IsDisposed;
+        public bool IsVisible => base.Visible;
 
         public UpdateStockForm(StockController controller) : base()
         {

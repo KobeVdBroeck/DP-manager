@@ -10,10 +10,10 @@ namespace DP_manager_API.Entities
         public int TotalCount { get; set; }
         public int PageLimit { get; set; }
 
-        public PagedResult(IEnumerable<T> result, int page, int pageLimit)
+        public PagedResult(IEnumerable<T> result, int page, int pageLimit, int totalCount)
         {
             Result = result.Skip(pageLimit * (page - 1)).Take(pageLimit);
-            TotalCount = result.Count();
+            TotalCount = totalCount;
             PageCount = 1 + (int) Math.Floor((decimal)(TotalCount / pageLimit));
             CurrentPage = page;
             PageLimit = pageLimit;

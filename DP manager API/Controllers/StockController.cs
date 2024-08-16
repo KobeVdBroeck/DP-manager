@@ -22,9 +22,9 @@ public class StockController(AppDbContext dbContext) : GraphController
             result = result.OrderBy(sortModel.FieldName + " " + sortModel.Direction);
 
         if (filterModel != null)
-            return new Entities.PagedResult<StockEntry>(result.Where(filterModel.BuildFilterFunction()), page, limit);
+            return new Entities.PagedResult<StockEntry>(result.Where(filterModel.BuildFilterFunction()), page, limit, result.Count());
 
-        return new Entities.PagedResult<StockEntry>(result, page, limit);
+        return new Entities.PagedResult<StockEntry>(result, page, limit, result.Count());
     }
 
     [MutationRoot("updateStock")]
@@ -66,7 +66,7 @@ public class StockController(AppDbContext dbContext) : GraphController
     }
 
     [QueryRoot("archive")]
-    public IEnumerable<ArchiveEntry> RetrieveArchiveList(FilterModel<ArchiveEntry> filterModel, SortModel<ArchiveEntry> sortModel, int limit = 100, int page = 1)
+    public Entities.PagedResult<ArchiveEntry> RetrieveArchiveList(FilterModel<ArchiveEntry> filterModel, SortModel<ArchiveEntry> sortModel, int limit = 100, int page = 1)
     {
         var result = dbContext.ArchiveEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable();
 
@@ -74,8 +74,8 @@ public class StockController(AppDbContext dbContext) : GraphController
             result = result.OrderBy(sortModel.FieldName + " " + sortModel.Direction);
 
         if (filterModel != null)
-            return result.Where(filterModel.BuildFilterFunction());
+            return new Entities.PagedResult<ArchiveEntry>(result.Where(filterModel.BuildFilterFunction()), page, limit, result.Count());
 
-        return result.Skip(limit * (page - 1)).Take(limit);
+        return new Entities.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
     }
 }
