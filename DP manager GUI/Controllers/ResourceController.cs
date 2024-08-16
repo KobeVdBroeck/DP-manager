@@ -22,6 +22,7 @@ namespace DP_manager
 
         public async Task<TResponse> GetEntries()
         {
+            var a = getQueryBuilder.BuildQuery();
             return await GrpcService.SendRequestAsync<TResponse>(getQueryBuilder.BuildQuery());
         }
 
@@ -57,6 +58,11 @@ namespace DP_manager
         {
             this.filter = ("", "");
             getQueryBuilder.RemoveArgument("filterModel");
+        }
+
+        public string UpdateQueryFormat(string query)
+        {
+            return query.Replace(" { ", " {{ ").Replace(" } ", " }} ");
         }
     }
 }

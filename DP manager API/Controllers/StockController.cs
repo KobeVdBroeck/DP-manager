@@ -78,4 +78,12 @@ public class StockController(AppDbContext dbContext) : GraphController
 
         return new Entities.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
     }
+
+    [QueryRoot("history")]
+    public Entities.PagedResult<ArchiveEntry> GetStockHistory(string history, int limit = 100, int page = 1)
+    {
+        var result = dbContext.ArchiveEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable().Where(a => history.StartsWith(a.History));
+
+        return new Entities.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
+    }
 }

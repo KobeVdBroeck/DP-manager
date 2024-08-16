@@ -1,4 +1,5 @@
 ﻿using DP_manager.Components;
+using DP_manager.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,7 +15,8 @@ namespace DP_manager
     {
         private static readonly string GETQUERY = "query { stock { result { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks, mediumId, plantCode }, currentPage, pageCount, totalCount } }";
         private static readonly string UPDATEQUERY = "mutation { updateStock( stock: { id: {0}, worker: \"{1}\", week: \"{2}\", lab: \"{3}\", location: \"{4}\", recipients: {5}, ppr: {6}, category: {7}, phase: {8}, health: {9}, history: \"{10}\", remarks: \"{11}\", mediumId: {12}, plantCode: \"{13}\", } , reason: \"{14}\") { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks }  } ";
-        private static readonly string REMOVEQUERY = "mutation { removeStock( id: {0} } , reason: \"{1}\") { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks, reason }  } ";
+        private static readonly string REMOVEQUERY = "mutation { removeStock( id: {0} } , reason: \"{1}\") { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks, reason }  } "; 
+
 
         public StockController() : base()
         {
@@ -22,7 +24,7 @@ namespace DP_manager
 
             menuItems.Add(new FormBoundMenuItem("Update", new UpdateStockForm(this))); 
             menuItems.Add(new FormBoundMenuItem("Remove", new ArchiveStockForm(this)));
-
+            menuItems.Add(new FormBoundMenuItem("History", new HistoryForm(new HistoryController())));
 
             SetSort("Id", "asc");
         }
@@ -49,12 +51,7 @@ namespace DP_manager
                 reason
             };
 
-            return string.Format(UpdateFormat(UPDATEQUERY), vals.Select(v => v.ToString()).ToArray());
-        }
-
-        public string UpdateFormat(string query)
-        {
-            return query.Replace(" { ", " {{ ").Replace(" } ", " }} ");
+            return string.Format(UpdateQueryFormat(UPDATEQUERY), vals.Select(v => v.ToString()).ToArray());
         }
 
         public async Task UpdateEntries(IEnumerable<StockEntry> response, string reason = "No reason specified.")
@@ -72,7 +69,7 @@ namespace DP_manager
 
         public async Task RemoveEntry(int id, string reason = "No reason specified.")
         {
-            await GrpcService.SendRequestAsync<StockEntry>(string.Format(UpdateFormat(REMOVEQUERY), id, reason));
+            await GrpcService.SendRequestAsync<StockEntry>(string.Format(UpdateQueryFormat(REMOVEQUERY), id, reason));
         }
     }
 }

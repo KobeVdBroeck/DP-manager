@@ -94,6 +94,12 @@
     <Compile Include="Components\ArchiveStockForm.Designer.cs">
       <DependentUpon>ArchiveStockForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\HistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\HistoryForm.Designer.cs">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\ResourceDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -120,6 +126,8 @@
       <DependentUpon>UpdateStockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ArchiveController.cs" />
+    <Compile Include="Controllers\HistoryController.cs" />
+    <Compile Include="Models\HistoryResponse.cs" />
     <Compile Include="Models\IGrpcResponse.cs" />
     <Compile Include="Models\ArchiveResponse.cs" />
     <Compile Include="Models\ArchiveEntry.cs" />
@@ -140,6 +148,9 @@
     <Compile Include="GrpcService.cs" />
     <EmbeddedResource Include="Components\ArchiveStockForm.resx">
       <DependentUpon>ArchiveStockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\HistoryForm.resx">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\PageControl.resx">
       <DependentUpon>PageControl.cs</DependentUpon>

@@ -150,8 +150,11 @@ namespace DP_manager.Components
                         Columns[filteredColumn].HeaderText = curText.Substring(0, curText.IndexOf(" = "));
                 }
 
-                filteredColumn = Columns[resourceController.filter.field].DisplayIndex;
-                filterValue = resourceController.filter.value;
+                if(resourceController.filter.field != "")
+                {
+                    filteredColumn = Columns[resourceController.filter.field].DisplayIndex;
+                    filterValue = resourceController.filter.value;
+                }
             }
             catch (Exception)
             {
