@@ -88,7 +88,7 @@ namespace DP_manager.Components
         {
             if(data != null)
             {
-                DialogResult result = MessageBox.Show("Confirm submit", "Are you sure you want to update this entry? The original entry will be archived.", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("Are you sure you want to update this entry? The original entry will be archived.", "Confirm", MessageBoxButtons.YesNo);
 
                 if(result == DialogResult.No)
                     return;

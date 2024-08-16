@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,8 +15,13 @@ namespace DP_manager.Components
         private BindingSource bindingSource = new BindingSource();
         private ResourceController<TResponse, TEntity> resourceController;
         private PageControl pageControl;
+        private ContextMenu headerContextMenu = new ContextMenu();
+        private ContextMenu contextMenu = new ContextMenu();
+        private int filteredColumn = -1;
+        private string filterValue = "";
         private string sortDirection = "";
         private int sortedColumn = -1;
+        private bool columnsInitialized = false;
 
         public ResourceDataGridView(PageControl pageControl, ResourceController<TResponse, TEntity> controller) : base()
         {
@@ -25,7 +31,9 @@ namespace DP_manager.Components
             Dock = DockStyle.Fill;
             RowHeadersVisible = false;
             AllowUserToResizeRows = false;
-            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            AllowUserToAddRows = false;
+            AllowUserToDeleteRows = false;
+            AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             EditMode = DataGridViewEditMode.EditProgrammatically;
 
@@ -34,12 +42,29 @@ namespace DP_manager.Components
                 SelectionForeColor = Color.Black 
             });
 
+            contextMenu.MenuItems.AddRange(resourceController.MenuItems.ToArray());
+            foreach (var menuItem in contextMenu.MenuItems)
+            {
+                var item = (FormBoundMenuItem)menuItem;
+                item.Click += MenuItem_Click;
+            }
+
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
-            CellMouseClick += OnRightMouseClick;
+            CellMouseDown += OnRightMouseClick;
             pageControl.PageChanged += PageControl_PageChanged;
 
             AutoGenerateColumns = true;
             DataSource = bindingSource;
+            resourceController.SetPaging(pageControl.Page, pageControl.PageLimit);
+
+            var filterMenuItem = new FormBoundMenuItem("Add filter", new SetFilterForm<TResponse, TEntity>(resourceController));
+            headerContextMenu.MenuItems.Add(filterMenuItem);
+            foreach (var menuItem in headerContextMenu.MenuItems)
+            {
+                var item = (FormBoundMenuItem)menuItem;
+                item.Click += HeaderMenuItem_Click;
+            }
+
             UpdateData();
         }
 
@@ -97,39 +122,78 @@ namespace DP_manager.Components
             pageControl.PageCount = pageCount;
 
             bindingSource.DataSource = new BindingList<object>(data.GetData().Cast<object>().ToList());
+
+            if(!columnsInitialized)
+            {
+                foreach (var item in Columns)
+                    ((DataGridViewColumn)item).MinimumWidth = 40;
+                columnsInitialized = true;
+            }
+
             Refresh();
 
-            if (sortDirection != "")
+            if (sortDirection != "" && !Columns[sortedColumn].HeaderText.EndsWith("▲") && !Columns[sortedColumn].HeaderText.EndsWith("▼"))
                 Columns[sortedColumn].HeaderText += sortDirection == "asc" ? "▲" : "▼";
+
+            ApplyFilterText();
+        }
+
+        private void ApplyFilterText()
+        {
+            try
+            {
+                if(filteredColumn != -1)
+                {
+                    string curText = Columns[filteredColumn].HeaderText;
+
+                    if (filteredColumn != -1 && resourceController.filter.field != "")
+                        Columns[filteredColumn].HeaderText = curText.Substring(0, curText.IndexOf(" = "));
+                }
+
+                filteredColumn = Columns[resourceController.filter.field].DisplayIndex;
+                filterValue = resourceController.filter.value;
+            }
+            catch (Exception)
+            {
+                filteredColumn = -1;
+            }
+
+            if (filteredColumn != -1 && !Columns[filteredColumn].HeaderText.Contains('='))
+            {
+                Columns[filteredColumn].HeaderText += " = " + filterValue;
+            }
         }
 
         private void OnRightMouseClick(object sender, MouseEventArgs e)
         {
-            // paygrid.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Location
-            if (e.Button == MouseButtons.Right)
+            Point location = PointToClient(MousePosition);
+            var hit = HitTest(location.X, location.Y);
+
+            if(hit.Type == DataGridViewHitTestType.ColumnHeader)
             {
-                ContextMenu m = new ContextMenu();
+                location.Offset(5, 5);
 
-                m.MenuItems.AddRange(resourceController.MenuItems.ToArray());
-                foreach (var menuItem in m.MenuItems)
+                if (e.Button == MouseButtons.Right)
+                    headerContextMenu.Show(this, location);
+            }
+            else if(hit.Type == DataGridViewHitTestType.Cell)
+            {
+                if (!SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == hit.RowIndex))
                 {
-                    var item = (FormBoundMenuItem) menuItem;
-                    item.Click += Form_Click;
+                    foreach (var item in SelectedRows.Cast<DataGridViewRow>())
+                        item.Selected = false;
+
+                    Rows[hit.RowIndex].Selected = true;
                 }
 
-                int currentMouseOverRow = HitTest(e.X, e.Y).RowIndex;
+                location.Offset(5, 5);
 
-
-                if (currentMouseOverRow >= 0)
-                {
-                    m.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
-                }
-
-                m.Show(this, new Point(e.X, e.Y));
+                if (e.Button == MouseButtons.Right)
+                    contextMenu.Show(this, location);
             }
         }
 
-        private void Form_Click(object sender, EventArgs e)
+        private void MenuItem_Click(object sender, EventArgs e)
         {
             var count = Rows.GetRowCount(DataGridViewElementStates.Selected);
 
@@ -148,6 +212,24 @@ namespace DP_manager.Components
                 formMenuItem.Form.Show();
                 formMenuItem.Form.Close += Form_Close;
             }
+        }
+
+        private void HeaderMenuItem_Click(object sender, EventArgs e)
+        {
+            Point location = PointToClient(MousePosition);
+            var hit = HitTest(location.X, location.Y);
+
+            var count = Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            var formMenuItem = (FormBoundMenuItem)sender;
+            var form = formMenuItem.Form;
+
+            if (form.IsDisposed || form.IsVisible)
+                formMenuItem.Form = (ResourceForm)form.Reconstruct();
+
+            formMenuItem.Form.Data = (entry: bindingSource[0], field: Columns[hit.ColumnIndex].HeaderText);
+            formMenuItem.Form.Show();
+            formMenuItem.Form.Close += Form_Close;
         }
 
         private void Form_Close(object sender, EventArgs e)

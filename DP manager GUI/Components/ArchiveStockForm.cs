@@ -62,7 +62,7 @@ namespace DP_manager.Components
         {
             if (data != 0)
             {
-                DialogResult result = MessageBox.Show("Confirm submit", "Are you sure you want to delete this entry and move it to the archive?", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this entry and move it to the archive?", "Confirm", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.No)
                     return;
