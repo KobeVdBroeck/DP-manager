@@ -119,6 +119,18 @@
     <Compile Include="Components\SetFilterForm.Designer.cs">
       <DependentUpon>SetFilterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\SetPageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\SetPageForm.Designer.cs">
+      <DependentUpon>SetPageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\SplitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\SplitForm.Designer.cs">
+      <DependentUpon>SplitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\UpdateStockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +150,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\PagedResponse.cs" />
+    <Compile Include="Models\SplitResponse.cs" />
     <Compile Include="QueryBuilder.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Models\StockResponse.cs" />
@@ -157,6 +170,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\SetFilterForm.resx">
       <DependentUpon>SetFilterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\SetPageForm.resx">
+      <DependentUpon>SetPageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\SplitForm.resx">
+      <DependentUpon>SplitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\UpdateStockForm.resx">
       <DependentUpon>UpdateStockForm.cs</DependentUpon>

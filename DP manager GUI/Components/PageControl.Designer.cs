@@ -110,6 +110,7 @@
             this.currentPageLabel.TabIndex = 8;
             this.currentPageLabel.Text = "1/1";
             this.currentPageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.currentPageLabel.DoubleClick += new System.EventHandler(this.currentPageLabel_DoubleClick);
             // 
             // PageControl
             // 

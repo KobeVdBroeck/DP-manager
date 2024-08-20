@@ -68,5 +68,15 @@ namespace DP_manager.Components
         private void Button3_Click(object sender, EventArgs e) => Page -= 1;
         private void Button2_Click(object sender, EventArgs e) => Page += 1;
         private void Button1_Click(object sender, EventArgs e) => Page = PageCount;
+
+        private void currentPageLabel_DoubleClick(object sender, EventArgs e)
+        {
+            var form = new SetPageForm(PageCount);
+            form.ShowDialog();
+            var res = form.GetResult();
+
+            if (res != null)
+                Page = res.Value;
+        }
     }
 }

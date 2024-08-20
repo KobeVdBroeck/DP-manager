@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using GraphQL.Client.Serializer.Newtonsoft;
 using GraphQL.Client.Abstractions;
 using DP_manager.Components;
+using System.Media;
 
 namespace DP_manager
 {

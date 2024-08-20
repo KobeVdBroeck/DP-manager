@@ -9,6 +9,7 @@ namespace DP_manager
     public abstract class ResourceController<TResponse, TEntity>
     {
         protected QueryBuilder getQueryBuilder;
+        protected QueryBuilder insertQueryBuilder;
         protected string updateQueryBuilder;
         protected List<MenuItem> menuItems;
         public List<MenuItem> MenuItems { get => menuItems; }
