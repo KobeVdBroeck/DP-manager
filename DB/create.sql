@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS "Plant"
 
 CREATE TABLE IF NOT EXISTS "Medium"
 (
-    "Id" integer,
+    "Id" integer UNIQUE,
     "Description" text,
     PRIMARY KEY ("Id")
 );

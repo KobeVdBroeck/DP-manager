@@ -7,6 +7,8 @@ using GraphQL.AspNet.Controllers;
 using GraphQL.AspNet.Interfaces.Controllers;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
+using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DP_manager_API.Controllers;
 
@@ -82,8 +84,44 @@ public class StockController(AppDbContext dbContext) : GraphController
     [QueryRoot("history")]
     public Entities.PagedResult<ArchiveEntry> GetStockHistory(string history, int limit = 100, int page = 1)
     {
-        var result = dbContext.ArchiveEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable().Where(a => history.StartsWith(a.History));
+        var entries = new List<string>();
+        var entry = new StringBuilder();
+        foreach(char c in history)
+        {
+            entry.Append(c);
+            if(c == ';')
+                entries.Add(entry.ToString());
+        }
+
+        var result = dbContext.ArchiveEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable().Where(a => entries.Contains(a.History));
 
         return new Entities.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
+    }
+
+    [MutationRoot("split")]
+    public SplitResponse SplitStock(int id, IEnumerable<StockEntry> newEntries, string? reason)
+    {
+        var original = dbContext.StockEntries.Find(id);
+
+        if (original == null)
+            throw new Exception("Stock entry not found.");
+
+        dbContext.StockEntries.Remove(original);
+        dbContext.ArchiveEntries.Add(original.Adapt(reason));
+
+        foreach(StockEntry entry in newEntries)
+        {
+            var toAdd = entry.WithoutId(original.History + original.Id + ";");
+
+            dbContext.StockEntries.Add(toAdd);
+        }
+
+        dbContext.SaveChanges();
+
+        return new SplitResponse() 
+        { 
+            New = dbContext.StockEntries.OrderBy("Id desc").Take(newEntries.Count()).Reverse(), 
+            Original = dbContext.ArchiveEntries.OrderBy("Id").Last() 
+        };
     }
 }

@@ -65,6 +65,8 @@ namespace DP_manager.Components
         private void InitComboBox()
         {
             List<string> strings = data.entry.GetType().GetProperties().Select(p => p.Name).Where(s => !(s == "Id")).ToList();
+            cb_fields.Items.Clear();
+            cb_fields.Items.Add("No filter");
             cb_fields.Items.AddRange(strings.ToArray());
             int a = strings.IndexOf(data.field);
             cb_fields.SelectedIndex = strings.IndexOf(data.field);
@@ -72,11 +74,17 @@ namespace DP_manager.Components
 
         private void btn_confirm_Click(object sender, EventArgs e)
         {
-            if(cb_fields.SelectedIndex == -1)
+            if(cb_fields.SelectedIndex == 0)
             {
-                MessageBox.Show("", "Choose a valid column or cancel.");
+                controller.RemoveFilter();
+                Close();
             }
 
+            if(cb_fields.SelectedIndex == -1)
+            {
+                MessageBox.Show("Choose a valid column or cancel.", "Error");
+                return;
+            }
 
             controller.SetFilter((string)cb_fields.SelectedItem, tb_value.Text);
 

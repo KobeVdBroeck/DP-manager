@@ -86,7 +86,7 @@ namespace DP_manager_API.Data
 
                             if (isArchive)
                             {
-                                entry.History = counter.ToString() + ";";
+                                entry.History = (counter + 6000).ToString() + ";";
                                 appDbContext.ArchiveEntries.Add((ArchiveEntry)entry);
                             }
                             else

@@ -37,12 +37,13 @@ namespace DP_manager.Components
 
         public ArchiveStockForm(StockController controller)
         {
+            this.controller = controller;
             InitializeComponent();
         }
 
         public Form Reconstruct()
         {
-            return new UpdateStockForm(controller);
+            return new ArchiveStockForm(controller);
         }
 
         event EventHandler<EventArgs> ResourceForm.Close
@@ -67,7 +68,7 @@ namespace DP_manager.Components
                 if (result == DialogResult.No)
                     return;
 
-                await controller.RemoveEntry(data, rtb_reason.Text ?? default);
+                await controller.RemoveEntry(data, rtb_reason.Text ?? "");
             }
 
             Close();
