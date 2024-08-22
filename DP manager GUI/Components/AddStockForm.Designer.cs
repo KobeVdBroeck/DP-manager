@@ -1,6 +1,6 @@
 ﻿namespace DP_manager.Components
 {
-    partial class UpdateStockForm
+    partial class AddStockForm
     {
         /// <summary>
         /// Required designer variable.

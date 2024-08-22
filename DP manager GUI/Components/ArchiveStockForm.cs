@@ -63,9 +63,9 @@ namespace DP_manager.Components
         {
             if (data != 0)
             {
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this entry and move it to the archive?", "Confirm", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this entry and move it to the archive?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
-                if (result == DialogResult.No)
+                if (result == DialogResult.Cancel)
                     return;
 
                 await controller.RemoveEntry(data, rtb_reason.Text ?? "");

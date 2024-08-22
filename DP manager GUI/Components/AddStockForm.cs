@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace DP_manager.Components
 {
-    public partial class UpdateStockForm : Form, ResourceForm
+    public partial class AddStockForm : Form, ResourceForm
     {
+        bool update;
+
         StockEntry data;
         public object Data 
         { 
@@ -36,15 +38,20 @@ namespace DP_manager.Components
         new public bool IsDisposed => base.IsDisposed;
         public bool IsVisible => base.Visible;
 
-        public UpdateStockForm(StockController controller) : base()
+        string ConfirmMsg => update ? 
+            "Are you sure you want to add this entry?" : 
+            "Are you sure you want to update this entry? The original will be moved to the archive.";
+
+        public AddStockForm(StockController controller, bool update) : base()
         {
+            this.update = update;
             this.controller = controller;
             InitializeComponent();
         }
 
         public Form Reconstruct()
         {
-            return new UpdateStockForm(controller);
+            return new AddStockForm(controller, update);
         }
 
         event EventHandler<EventArgs> ResourceForm.Close
@@ -62,6 +69,13 @@ namespace DP_manager.Components
 
         private void InitComponentData()
         {
+            if(!update)
+            {
+                lb_reason.Visible = false;
+                rtb_reason.Visible = false;
+                return;
+            }
+
             tb_worker.Text = data.Worker;
             nud_year.Text = data.Week.Substring(0, 2);
             nud_week.Text = data.Week.Substring(2);
@@ -76,24 +90,21 @@ namespace DP_manager.Components
             tb_remarks.Text = data.Remarks;
             cb_plantCode.Text = "todo";
             cb_mediumId.Text = "todo";
-
-            if(data == null) 
-            {
-                lb_reason.Enabled = false;
-                rtb_reason.Enabled = false;
-            }
         }
 
         private async void btn_confirm_Click(object sender, EventArgs e)
         {
             if(data != null)
             {
-                DialogResult result = MessageBox.Show("Are you sure you want to update this entry? The original entry will be archived.", "Confirm", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show(ConfirmMsg, "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
-                if(result == DialogResult.No)
+                if(result == DialogResult.Cancel)
                     return;
 
-                await controller.UpdateEntry(data, rtb_reason.Text ?? default);
+                if(update)
+                    await controller.UpdateEntry(data, rtb_reason.Text ?? default);
+                else
+                    await controller.InsertEntry(data);
             }
 
             Close();

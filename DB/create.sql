@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS "ArchivedStock"
     "Remarks" text,
     "PlantCode" character varying(10) NOT NULL,
     "MediumId" integer NOT NULL,
-    "Reason" character varying(20) NOT NULL,
+    "Reason" character varying(200) NOT NULL,
     PRIMARY KEY ("Id")
 ) ;
 

@@ -29,6 +29,7 @@ namespace DP_manager.Components
             this.pageControl = pageControl;
 
             Dock = DockStyle.Fill;
+            StandardTab = true;
             RowHeadersVisible = false;
             AllowUserToResizeRows = false;
             AllowUserToAddRows = false;
@@ -52,13 +53,13 @@ namespace DP_manager.Components
             ColumnHeaderMouseClick += OnColumnHeaderMouseClick;
             CellMouseDown += OnRightMouseClick;
             pageControl.PageChanged += PageControl_PageChanged;
+            KeyDown += OnKeyDown;
 
             AutoGenerateColumns = true;
             DataSource = bindingSource;
             resourceController.SetPaging(pageControl.Page, pageControl.PageLimit);
 
-            var filterMenuItem = new FormBoundMenuItem("Add filter", new SetFilterForm<TResponse, TEntity>(resourceController));
-            headerContextMenu.MenuItems.Add(filterMenuItem);
+            headerContextMenu.MenuItems.Add(new FormBoundMenuItem("Add filter", new SetFilterForm<TResponse, TEntity>(resourceController)));
             foreach (var menuItem in headerContextMenu.MenuItems)
             {
                 var item = (FormBoundMenuItem)menuItem;
@@ -66,6 +67,18 @@ namespace DP_manager.Components
             }
 
             UpdateData();
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            Point location = PointToClient(MousePosition);
+            var hit = HitTest(location.X, location.Y);
+            location.Offset(5, 5);
+
+            if (e.Control)
+                contextMenu.Show(this, location);
+            if (e.Alt)
+                headerContextMenu.Show(this, location);
         }
 
         private void PageControl_PageChanged(object sender, EventArgs e)
@@ -134,6 +147,9 @@ namespace DP_manager.Components
 
             if (sortDirection != "" && !Columns[sortedColumn].HeaderText.EndsWith("▲") && !Columns[sortedColumn].HeaderText.EndsWith("▼"))
                 Columns[sortedColumn].HeaderText += sortDirection == "asc" ? "▲" : "▼";
+
+            foreach(var col in Columns)
+                ((DataGridViewColumn)col).MinimumWidth = 2;
 
             ApplyFilterText();
         }

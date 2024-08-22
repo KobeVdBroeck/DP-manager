@@ -34,10 +34,10 @@ namespace DP_manager
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tlp_stock = new System.Windows.Forms.TableLayoutPanel();
+            this.pageControl1 = new DP_manager.Components.PageControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tlp_archive = new System.Windows.Forms.TableLayoutPanel();
             this.pageControl2 = new DP_manager.Components.PageControl();
-            this.pageControl1 = new DP_manager.Components.PageControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tlp_stock.SuspendLayout();
@@ -54,7 +54,7 @@ namespace DP_manager
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1031, 581);
-            this.tabControl1.TabIndex = 2;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -81,6 +81,18 @@ namespace DP_manager
             this.tlp_stock.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_stock.Size = new System.Drawing.Size(1017, 546);
             this.tlp_stock.TabIndex = 1;
+            // 
+            // pageControl1
+            // 
+            this.pageControl1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pageControl1.AutoSize = true;
+            this.pageControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pageControl1.Location = new System.Drawing.Point(410, 502);
+            this.pageControl1.Name = "pageControl1";
+            this.pageControl1.Page = 1;
+            this.pageControl1.PageCount = 1;
+            this.pageControl1.Size = new System.Drawing.Size(197, 41);
+            this.pageControl1.TabIndex = 2;
             // 
             // tabPage2
             // 
@@ -118,19 +130,7 @@ namespace DP_manager
             this.pageControl2.Page = 1;
             this.pageControl2.PageCount = 1;
             this.pageControl2.Size = new System.Drawing.Size(197, 41);
-            this.pageControl2.TabIndex = 0;
-            // 
-            // pageControl1
-            // 
-            this.pageControl1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pageControl1.AutoSize = true;
-            this.pageControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pageControl1.Location = new System.Drawing.Point(410, 502);
-            this.pageControl1.Name = "pageControl1";
-            this.pageControl1.Page = 1;
-            this.pageControl1.PageCount = 1;
-            this.pageControl1.Size = new System.Drawing.Size(197, 41);
-            this.pageControl1.TabIndex = 0;
+            this.pageControl2.TabIndex = 2;
             // 
             // Form1
             // 
