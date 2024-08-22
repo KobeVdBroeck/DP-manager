@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -9,7 +11,7 @@ namespace DP_manager
     public abstract class ResourceController<TResponse, TEntity>
     {
         protected QueryBuilder getQueryBuilder;
-        protected QueryBuilder insertQueryBuilder;
+        protected string insertQueryBuilder;
         protected string updateQueryBuilder;
         protected List<MenuItem> menuItems;
         public List<MenuItem> MenuItems { get => menuItems; }
@@ -23,8 +25,12 @@ namespace DP_manager
 
         public async Task<TResponse> GetEntries()
         {
-            var a = getQueryBuilder.BuildQuery();
             return await GrpcService.SendRequestAsync<TResponse>(getQueryBuilder.BuildQuery());
+        }
+
+        public async Task<TEntity> InsertEntry(TEntity entity)
+        {
+            return await GrpcService.SendRequestAsync<TEntity>(string.Format(UpdateQueryFormat(FormatEntityString(entity)), entity));
         }
 
         public void RemovePaging()
@@ -64,6 +70,28 @@ namespace DP_manager
         public string UpdateQueryFormat(string query)
         {
             return query.Replace(" { ", " {{ ").Replace(" } ", " }} ");
+        }
+
+        public string FormatStockList(IEnumerable<TEntity> entries)
+        {
+            return $"[{{{String.Join("},{", entries.Select(e => FormatEntityString(e)))}}}]";
+        }
+
+        public string FormatEntityString(TEntity entry)
+        {
+            return String.Join(", ", entry.GetType().GetProperties().Select(p =>
+            {
+                var val = p.GetValue(entry);
+
+                if (val is string)
+                    val = $"\"{val}\"";
+                else if (val != null)
+                    val = val.ToString();
+                else
+                    val = "\"\"";
+
+                return p.Name.Replace(p.Name[0], Char.ToLowerInvariant(p.Name[0])) + ": " + val;
+            }));
         }
     }
 }

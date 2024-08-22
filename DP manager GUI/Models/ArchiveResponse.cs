@@ -5,7 +5,7 @@ namespace DP_manager
 {
     public class ArchiveResponse : IGrpcResponse
     {
-        public PagedResponse<IEnumerable<StockEntry>> Archive { get; set; }
+        public PagedResponse<IEnumerable<ArchiveEntry>> Archive { get; set; }
 
         public IEnumerable GetData()
         {

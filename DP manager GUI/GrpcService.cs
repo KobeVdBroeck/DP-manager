@@ -16,9 +16,12 @@ namespace DP_manager
     {
         static GraphQLHttpClient client;
 
-        static GrpcService()
+        public static bool Connected => client != null;
+        public static string Address { set => InitClient(value); }
+
+        static void InitClient(string address)
         {
-            var endpoint = new Uri("https://localhost:7241/graphql");
+            var endpoint = new Uri(address);
 
             var graphQLHttpClientOptions = new GraphQLHttpClientOptions
             {

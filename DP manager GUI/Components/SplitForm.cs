@@ -24,7 +24,18 @@ namespace DP_manager.Components
             InitializeComponent();
             dgv_entries.AllowUserToResizeRows = false;
             dgv_entries.AllowUserToAddRows = true;
+            dgv_entries.RowHeadersVisible = false;
             dgv_entries.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            bindingSource.AddingNew += BindingSource_AddingNew;
+
+            dgv_original.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_original.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgv_original.RowHeadersVisible = false;
+        }
+
+        private void BindingSource_AddingNew(object sender, AddingNewEventArgs e)
+        {
+            e.NewObject = data.Clone();
         }
 
         StockEntry data;
@@ -40,9 +51,10 @@ namespace DP_manager.Components
 
         private void InitData()
         {
+            dgv_original.DataSource = new BindingSource() { data };
             dgv_entries.DataSource = bindingSource;
-            bindingSource.Add(data);
             dgv_entries.Columns[0].Visible = false;
+            dgv_original.Columns[0].Visible = false;
         }
 
         StockController controller;
@@ -76,9 +88,18 @@ namespace DP_manager.Components
             }
         }
 
-        private void btn_confirm_Click(object sender, EventArgs e)
+        private async void btn_confirm_Click(object sender, EventArgs e)
         {
-            controller.FormatStockList(((BindingList<StockEntry>)bindingSource.DataSource).ToList());
+            var newEntries = ((BindingList<StockEntry>)bindingSource.DataSource).ToList();
+
+            if (newEntries.Count == 0)
+                MessageBox.Show("Please add some entries to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            if(MessageBox.Show("Are you sure you want to split this entry?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                await controller.SplitEntry(data.Id, newEntries, "Split up into more entries.");
+                Close();
+            }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)

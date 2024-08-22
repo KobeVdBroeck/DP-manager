@@ -29,6 +29,15 @@ public class StockController(AppDbContext dbContext) : GraphController
         return new Entities.PagedResult<StockEntry>(result, page, limit, result.Count());
     }
 
+    [MutationRoot("insertStock")]
+    public StockEntry UpdateStockEntry(StockEntry stock)
+    {
+        dbContext.StockEntries.Add(stock.WithoutId(""));
+        dbContext.SaveChanges();
+
+        return dbContext.StockEntries.OrderBy("Id").Last();
+    }
+
     [MutationRoot("updateStock")]
     public StockEntry UpdateStockEntry(StockEntry stock, string? reason)
     {
@@ -42,7 +51,7 @@ public class StockController(AppDbContext dbContext) : GraphController
 
         var archive = toUpdate.Adapt(reason);
         dbContext.ArchiveEntries.Add(archive);
-        dbContext.StockEntries.Add(stock.WithoutId(archive.History));
+        dbContext.StockEntries.Add(toUpdate.WithoutId(toUpdate.History + toUpdate.Id + ";"));
 
         dbContext.SaveChanges();
 

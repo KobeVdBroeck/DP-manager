@@ -82,7 +82,7 @@ namespace DP_manager.Components
 
             if(cb_fields.SelectedIndex == -1)
             {
-                MessageBox.Show("Choose a valid column or cancel.", "Error");
+                MessageBox.Show("Choose a valid column or cancel.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
