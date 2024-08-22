@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -11,7 +7,7 @@ namespace DP_manager.Components
     {
         public ResourceForm Form { get; set; }
 
-        public FormBoundMenuItem(string name, ResourceForm form) : base(name) 
+        public FormBoundMenuItem(string name, ResourceForm form) : base(name)
         {
             Name = name;
             Form = form;

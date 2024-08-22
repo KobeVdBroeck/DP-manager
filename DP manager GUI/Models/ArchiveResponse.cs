@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DP_manager
 {
-    public class ArchiveResponse : IGrpcResponse
+    public class ArchiveResponse : IGraphQlResponse
     {
         public PagedResponse<IEnumerable<ArchiveEntry>> Archive { get; set; }
 

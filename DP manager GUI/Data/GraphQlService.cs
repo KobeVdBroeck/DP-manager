@@ -2,17 +2,11 @@
 using GraphQL.Client.Http;
 using GraphQL.Client.Serializer.Newtonsoft;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using static DP_manager.Form1;
-using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace DP_manager
 {
-    public static class GrpcService
+    public static class GraphQlService
     {
         static GraphQLHttpClient client;
 

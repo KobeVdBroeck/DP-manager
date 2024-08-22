@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -18,8 +14,8 @@ namespace DP_manager.Components
             get { return data; }
             set
             {
-                var tupleVal = ((object entry, string field)) value;
-                data = ((StockEntry) tupleVal.entry, tupleVal.field);
+                var tupleVal = ((object entry, string field))value;
+                data = ((StockEntry)tupleVal.entry, tupleVal.field);
                 InitComboBox();
             }
         }
@@ -30,7 +26,7 @@ namespace DP_manager.Components
             get => controller;
             set
             {
-                controller = (ResourceController<TResponse, TEntity>) value;
+                controller = (ResourceController<TResponse, TEntity>)value;
             }
         }
 
@@ -74,13 +70,13 @@ namespace DP_manager.Components
 
         private void btn_confirm_Click(object sender, EventArgs e)
         {
-            if(cb_fields.SelectedIndex == 0)
+            if (cb_fields.SelectedIndex == 0)
             {
                 controller.RemoveFilter();
                 Close();
             }
 
-            if(cb_fields.SelectedIndex == -1)
+            if (cb_fields.SelectedIndex == -1)
             {
                 MessageBox.Show("Choose a valid column or cancel.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

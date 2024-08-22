@@ -1,0 +1,147 @@
+type Medium {
+  id: Int!
+  description: String
+}
+
+input Input_SortModel_ArchiveEntry_ {
+  fieldName: String = null
+  direction: String = "asc"
+}
+
+input Input_FilterModel_StockEntry_ {
+  fieldName: String = null
+  filter: String = null
+}
+
+input Input_SortModel_StockEntry_ {
+  fieldName: String = null
+  direction: String = "asc"
+}
+
+type Plant {
+  code: String
+}
+
+input Input_Plant {
+  code: String = null
+}
+
+type PagedResult_StockEntry_ {
+  result: [StockEntry]
+  currentPage: Int!
+  pageCount: Int!
+  totalCount: Int!
+  pageLimit: Int!
+}
+
+type PagedResult_ArchiveEntry_ {
+  result: [ArchiveEntry]
+  currentPage: Int!
+  pageCount: Int!
+  totalCount: Int!
+  pageLimit: Int!
+}
+
+type Query {
+  getStock(
+    filterModel: Input_FilterModel_StockEntry_
+    sortModel: Input_SortModel_StockEntry_
+    limit: Int! = 100
+    page: Int! = 1
+  ): PagedResult_StockEntry_
+  getArchive(
+    filterModel: Input_FilterModel_ArchiveEntry_
+    sortModel: Input_SortModel_ArchiveEntry_
+    limit: Int! = 100
+    page: Int! = 1
+  ): PagedResult_ArchiveEntry_
+  getHistory(
+    history: String
+    limit: Int! = 100
+    page: Int! = 1
+  ): PagedResult_ArchiveEntry_
+}
+
+type ArchiveEntry {
+  reason: String
+  id: Int!
+  worker: String
+  week: String
+  lab: String
+  location: String
+  recipients: Int!
+  ppr: Int!
+  category: Int!
+  phase: Int!
+  health: Int!
+  history: String
+  remarks: String
+  medium: Medium
+  mediumId: Int!
+  plant: Plant
+  plantCode: String
+}
+
+input Input_StockEntry {
+  id: Int! = 0
+  worker: String = null
+  week: String = null
+  lab: String = null
+  location: String = null
+  recipients: Int! = 0
+  ppr: Int! = 0
+  category: Int! = 0
+  phase: Int! = 0
+  health: Int! = 0
+  history: String = null
+  remarks: String = null
+  medium: Input_Medium = null
+  mediumId: Int! = 0
+  plant: Input_Plant = null
+  plantCode: String = null
+}
+
+input Input_Medium {
+  id: Int! = 0
+  description: String = null
+}
+
+type Mutation {
+  addStock(stock: Input_StockEntry): StockEntry
+  updateStock(stock: Input_StockEntry, reason: String): StockEntry
+  removeStock(id: Int!, reason: String): ArchiveEntry
+  splitStock(
+    id: Int!
+    newEntries: [Input_StockEntry]
+    reason: String
+  ): SplitResponse
+}
+
+input Input_FilterModel_ArchiveEntry_ {
+  fieldName: String = null
+  filter: String = null
+}
+
+type StockEntry {
+  id: Int!
+  worker: String
+  week: String
+  lab: String
+  location: String
+  recipients: Int!
+  ppr: Int!
+  category: Int!
+  phase: Int!
+  health: Int!
+  history: String
+  remarks: String
+  medium: Medium
+  mediumId: Int!
+  plant: Plant
+  plantCode: String
+}
+
+type SplitResponse {
+  new: [StockEntry]
+  original: ArchiveEntry
+}

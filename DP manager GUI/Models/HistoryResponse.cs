@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DP_manager.Models
 {
-    public class HistoryResponse : IGrpcResponse
+    public class HistoryResponse : IGraphQlResponse
     {
         public PagedResponse<IEnumerable<ArchiveEntry>> History { get; set; }
 

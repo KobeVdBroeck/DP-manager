@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Media;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -95,7 +89,7 @@ namespace DP_manager.Components
             if (newEntries.Count == 0)
                 MessageBox.Show("Please add some entries to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            if(MessageBox.Show("Are you sure you want to split this entry?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show("Are you sure you want to split this entry?", "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 await controller.SplitEntry(data.Id, newEntries, "Split up into more entries.");
                 Close();
@@ -114,7 +108,7 @@ namespace DP_manager.Components
 
             dgv_entries.Rows[row].DefaultCellStyle = new DataGridViewCellStyle() { BackColor = Color.OrangeRed };
 
-            if(row == 0)
+            if (row == 0)
                 dgv_entries.EndEdit();
         }
 
@@ -127,7 +121,7 @@ namespace DP_manager.Components
                     e.Cancel = false;
                     return;
                 }
-                if(((string) e.FormattedValue) == "")
+                if (((string)e.FormattedValue) == "")
                 {
                     e.Cancel = false;
                     dgv_entries.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = 0;
