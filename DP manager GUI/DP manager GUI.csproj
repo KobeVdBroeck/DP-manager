@@ -121,16 +121,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\ArchiveStockForm.cs">
+    <Compile Include="Components\Forms\ArchiveStockForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\ArchiveStockForm.Designer.cs">
+    <Compile Include="Components\Forms\ArchiveStockForm.Designer.cs">
       <DependentUpon>ArchiveStockForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\HistoryForm.cs">
+    <Compile Include="Components\Forms\HistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\HistoryForm.Designer.cs">
+    <Compile Include="Components\Forms\HistoryForm.Designer.cs">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Components\ResourceDataGridView.cs">
@@ -146,75 +146,75 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Components\ResourceForm.cs" />
-    <Compile Include="Components\SetFilterForm.cs">
+    <Compile Include="Components\Forms\SetFilterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\SetFilterForm.Designer.cs">
+    <Compile Include="Components\Forms\SetFilterForm.Designer.cs">
       <DependentUpon>SetFilterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\SetPageForm.cs">
+    <Compile Include="Components\Forms\SetPageForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\SetPageForm.Designer.cs">
+    <Compile Include="Components\Forms\SetPageForm.Designer.cs">
       <DependentUpon>SetPageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\SplitForm.cs">
+    <Compile Include="Components\Forms\SplitForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\SplitForm.Designer.cs">
+    <Compile Include="Components\Forms\SplitForm.Designer.cs">
       <DependentUpon>SplitForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\AddStockForm.cs">
+    <Compile Include="Components\Forms\AddStockForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Components\AddStockForm.Designer.cs">
+    <Compile Include="Components\Forms\AddStockForm.Designer.cs">
       <DependentUpon>AddStockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Models\HistoryResponse.cs" />
-    <Compile Include="Models\IGrpcResponse.cs" />
+    <Compile Include="Models\IGraphQlResponse.cs" />
     <Compile Include="Models\ArchiveResponse.cs" />
     <Compile Include="Models\ArchiveEntry.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Components\Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Components\Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\PagedResponse.cs" />
     <Compile Include="Models\SplitResponse.cs" />
-    <Compile Include="QueryBuilder.cs" />
+    <Compile Include="Data\QueryBuilder.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="Models\StockResponse.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Models\StockEntry.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GrpcService.cs" />
-    <EmbeddedResource Include="Components\ArchiveStockForm.resx">
+    <Compile Include="Data\GraphQlService.cs" />
+    <EmbeddedResource Include="Components\Forms\ArchiveStockForm.resx">
       <DependentUpon>ArchiveStockForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\HistoryForm.resx">
+    <EmbeddedResource Include="Components\Forms\HistoryForm.resx">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\PageControl.resx">
       <DependentUpon>PageControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\SetFilterForm.resx">
+    <EmbeddedResource Include="Components\Forms\SetFilterForm.resx">
       <DependentUpon>SetFilterForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\SetPageForm.resx">
+    <EmbeddedResource Include="Components\Forms\SetPageForm.resx">
       <DependentUpon>SetPageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\SplitForm.resx">
+    <EmbeddedResource Include="Components\Forms\SplitForm.resx">
       <DependentUpon>SplitForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\AddStockForm.resx">
+    <EmbeddedResource Include="Components\Forms\AddStockForm.resx">
       <DependentUpon>AddStockForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Components\Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

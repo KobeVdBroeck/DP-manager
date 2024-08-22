@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DP_manager
 {
@@ -14,21 +9,21 @@ namespace DP_manager
         string afterKeyword;
         Dictionary<string, List<string>> arguments = new Dictionary<string, List<string>>();
 
-        public QueryBuilder(string baseQuery, string afterKeyword) 
-        { 
+        public QueryBuilder(string baseQuery, string afterKeyword)
+        {
             this.baseQuery = baseQuery;
             this.afterKeyword = afterKeyword;
         }
 
         public void AddArgument(string to, string arg, bool removeExisting = false)
         {
-            if(!arguments.ContainsKey(to))
+            if (!arguments.ContainsKey(to))
             {
                 arguments.Add(to, new List<string>());
             }
-            else if(removeExisting)
+            else if (removeExisting)
                 arguments[to].Clear();
-                
+
 
             arguments[to].Add(arg);
         }
@@ -58,12 +53,12 @@ namespace DP_manager
 
                 int argCount = arguments[arg].Count;
 
-                for (int i = 0; i < argCount; i++) 
+                for (int i = 0; i < argCount; i++)
                 {
                     sb2.Append(arg + ": ");
                     sb2.Append(arguments[arg][i]);
 
-                    if(i != argCount)
+                    if (i != argCount)
                         sb2.Append(", ");
                 }
 

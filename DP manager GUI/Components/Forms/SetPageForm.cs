@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -26,10 +19,10 @@ namespace DP_manager.Components
 
         private void nud_page_ValueChanged(object sender, EventArgs e)
         {
-            if(nud_page.Value <= 0)
+            if (nud_page.Value <= 0)
                 nud_page.Value = 1;
 
-            if(nud_page.Value > pages)
+            if (nud_page.Value > pages)
                 nud_page.Value = pages;
         }
 
@@ -45,8 +38,8 @@ namespace DP_manager.Components
 
         public int? GetResult()
         {
-            return result; 
+            return result;
         }
-    
+
     }
 }

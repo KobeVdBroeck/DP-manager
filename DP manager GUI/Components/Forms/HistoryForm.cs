@@ -1,13 +1,6 @@
 ﻿using DP_manager.Controllers;
 using DP_manager.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -67,7 +60,7 @@ namespace DP_manager.Components
         new public void Show()
         {
             controller.History = data.History;
-            
+
             dgv_stock = new ResourceDataGridView<HistoryResponse, ArchiveEntry>(pageControl1, controller);
             tlp_stock.Controls.Add(dgv_stock, 0, 0);
             base.Show();

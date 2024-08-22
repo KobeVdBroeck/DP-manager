@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -14,7 +6,8 @@ namespace DP_manager.Components
     public partial class PageControl : UserControl
     {
         int page;
-        public int Page {
+        public int Page
+        {
             get => page;
             set
             {

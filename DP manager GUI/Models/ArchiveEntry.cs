@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-
-namespace DP_manager
+﻿namespace DP_manager
 {
     public class ArchiveEntry : StockEntry
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DP_manager
 {
-    public class StockResponse : IGrpcResponse
+    public class StockResponse : IGraphQlResponse
     {
         public PagedResponse<IEnumerable<StockEntry>> Stock { get; set; }
 

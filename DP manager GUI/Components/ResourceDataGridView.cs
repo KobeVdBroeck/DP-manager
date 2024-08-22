@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
 {
-    internal class ResourceDataGridView<TResponse, TEntity> : DataGridView where TResponse : IGrpcResponse
+    internal class ResourceDataGridView<TResponse, TEntity> : DataGridView where TResponse : IGraphQlResponse
     {
         private BindingSource bindingSource = new BindingSource();
         private ResourceController<TResponse, TEntity> resourceController;
@@ -38,9 +34,10 @@ namespace DP_manager.Components
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             EditMode = DataGridViewEditMode.EditProgrammatically;
 
-            DefaultCellStyle.ApplyStyle(new DataGridViewCellStyle() { 
-                SelectionBackColor = Color.LightGreen, 
-                SelectionForeColor = Color.Black 
+            DefaultCellStyle.ApplyStyle(new DataGridViewCellStyle()
+            {
+                SelectionBackColor = Color.LightGreen,
+                SelectionForeColor = Color.Black
             });
 
             contextMenu.MenuItems.AddRange(resourceController.MenuItems.ToArray());
@@ -91,7 +88,7 @@ namespace DP_manager.Components
         {
             int column = e.ColumnIndex;
 
-            
+
             if (sortDirection != "")
             {
                 string curText = Columns[sortedColumn].HeaderText;
@@ -110,7 +107,7 @@ namespace DP_manager.Components
                 sortedColumn = column;
                 resourceController.SetSort(Columns[column].Name, "asc");
             }
-            else if(sortDirection == "asc")
+            else if (sortDirection == "asc")
             {
                 sortDirection = "desc";
                 sortedColumn = column;
@@ -136,7 +133,7 @@ namespace DP_manager.Components
 
             bindingSource.DataSource = new BindingList<object>(data.GetData().Cast<object>().ToList());
 
-            if(!columnsInitialized)
+            if (!columnsInitialized)
             {
                 foreach (var item in Columns)
                     ((DataGridViewColumn)item).MinimumWidth = 40;
@@ -148,7 +145,7 @@ namespace DP_manager.Components
             if (sortDirection != "" && !Columns[sortedColumn].HeaderText.EndsWith("▲") && !Columns[sortedColumn].HeaderText.EndsWith("▼"))
                 Columns[sortedColumn].HeaderText += sortDirection == "asc" ? "▲" : "▼";
 
-            foreach(var col in Columns)
+            foreach (var col in Columns)
                 ((DataGridViewColumn)col).MinimumWidth = 2;
 
             ApplyFilterText();
@@ -158,7 +155,7 @@ namespace DP_manager.Components
         {
             try
             {
-                if(filteredColumn != -1)
+                if (filteredColumn != -1)
                 {
                     string curText = Columns[filteredColumn].HeaderText;
 
@@ -166,7 +163,7 @@ namespace DP_manager.Components
                         Columns[filteredColumn].HeaderText = curText.Substring(0, curText.IndexOf(" = "));
                 }
 
-                if(resourceController.filter.field != "")
+                if (resourceController.filter.field != "")
                 {
                     filteredColumn = Columns[resourceController.filter.field].DisplayIndex;
                     filterValue = resourceController.filter.value;
@@ -188,14 +185,14 @@ namespace DP_manager.Components
             Point location = PointToClient(MousePosition);
             var hit = HitTest(location.X, location.Y);
 
-            if(hit.Type == DataGridViewHitTestType.ColumnHeader)
+            if (hit.Type == DataGridViewHitTestType.ColumnHeader)
             {
                 location.Offset(5, 5);
 
                 if (e.Button == MouseButtons.Right)
                     headerContextMenu.Show(this, location);
             }
-            else if(hit.Type == DataGridViewHitTestType.Cell)
+            else if (hit.Type == DataGridViewHitTestType.Cell)
             {
                 if (!SelectedRows.Cast<DataGridViewRow>().Any(r => r.Index == hit.RowIndex))
                 {
@@ -218,14 +215,14 @@ namespace DP_manager.Components
 
             foreach (var item in SelectedRows)
             {
-                var index = ((DataGridViewRow) item).Index;
-                var entity = (TEntity) bindingSource[index];
+                var index = ((DataGridViewRow)item).Index;
+                var entity = (TEntity)bindingSource[index];
 
-                var formMenuItem = (FormBoundMenuItem) sender;
+                var formMenuItem = (FormBoundMenuItem)sender;
                 var form = formMenuItem.Form;
 
                 if (form.IsDisposed || form.IsVisible)
-                    formMenuItem.Form = (ResourceForm) form.Reconstruct();
+                    formMenuItem.Form = (ResourceForm)form.Reconstruct();
 
                 formMenuItem.Form.Data = entity;
                 formMenuItem.Form.Show();

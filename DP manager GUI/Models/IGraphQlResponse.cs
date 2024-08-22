@@ -2,7 +2,7 @@
 
 namespace DP_manager
 {
-    public interface IGrpcResponse
+    public interface IGraphQlResponse
     {
         IEnumerable GetData();
         (int page, int pageCount) GetPageInfo();

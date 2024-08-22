@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,12 +23,12 @@ namespace DP_manager
 
         public async Task<TResponse> GetEntries()
         {
-            return await GrpcService.SendRequestAsync<TResponse>(getQueryBuilder.BuildQuery());
+            return await GraphQlService.SendRequestAsync<TResponse>(getQueryBuilder.BuildQuery());
         }
 
         public async Task<TEntity> InsertEntry(TEntity entity)
         {
-            return await GrpcService.SendRequestAsync<TEntity>(string.Format(UpdateQueryFormat(FormatEntityString(entity)), entity));
+            return await GraphQlService.SendRequestAsync<TEntity>(string.Format(UpdateQueryFormat(FormatEntityString(entity)), entity));
         }
 
         public void RemovePaging()

@@ -1,24 +1,23 @@
 ﻿using System.Reflection;
 
-namespace DP_manager_API.Models
+namespace DP_manager_API.Models;
+
+public class FilterModel<T>
 {
-    public class FilterModel<T>
+    public string FieldName { get; set; }
+    public string Filter { get; set; }
+
+    public Func<T, bool> BuildFilterFunction()
     {
-        public string FieldName { get; set; }
-        public string Filter { get; set; }
+        if (string.IsNullOrWhiteSpace(FieldName) || string.IsNullOrWhiteSpace(Filter))
+            return (t) => true;
 
-        public Func<T, bool> BuildFilterFunction()
+        Func<T, bool> temp = (t) =>
         {
-            if (string.IsNullOrWhiteSpace(FieldName) || string.IsNullOrWhiteSpace(Filter))
-                return (t) => true;
+            PropertyInfo pinfo = typeof(T).GetProperty(FieldName);
+            return pinfo.GetValue(t, null).ToString().Contains(Filter);
+        };
 
-            Func<T, bool> temp = (t) =>
-            {
-                PropertyInfo pinfo = typeof(T).GetProperty(FieldName);
-                return pinfo.GetValue(t, null).ToString().Contains(Filter);
-            };
-
-            return temp;
-        }
+        return temp;
     }
 }

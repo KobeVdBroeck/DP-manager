@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -15,12 +8,12 @@ namespace DP_manager.Components
         bool update;
 
         StockEntry data;
-        public object Data 
-        { 
-            get { return data;  }
-            set 
+        public object Data
+        {
+            get { return data; }
+            set
             {
-                data = (StockEntry) value;
+                data = (StockEntry)value;
                 InitComponentData();
             }
         }
@@ -31,15 +24,15 @@ namespace DP_manager.Components
             get => controller;
             set
             {
-                controller = (StockController) value;
+                controller = (StockController)value;
             }
         }
 
         new public bool IsDisposed => base.IsDisposed;
         public bool IsVisible => base.Visible;
 
-        string ConfirmMsg => update ? 
-            "Are you sure you want to add this entry?" : 
+        string ConfirmMsg => update ?
+            "Are you sure you want to add this entry?" :
             "Are you sure you want to update this entry? The original will be moved to the archive.";
 
         public AddStockForm(StockController controller, bool update) : base()
@@ -69,7 +62,7 @@ namespace DP_manager.Components
 
         private void InitComponentData()
         {
-            if(!update)
+            if (!update)
             {
                 lb_reason.Visible = false;
                 rtb_reason.Visible = false;
@@ -94,14 +87,14 @@ namespace DP_manager.Components
 
         private async void btn_confirm_Click(object sender, EventArgs e)
         {
-            if(data != null)
+            if (data != null)
             {
                 DialogResult result = MessageBox.Show(ConfirmMsg, "Confirm", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
-                if(result == DialogResult.Cancel)
+                if (result == DialogResult.Cancel)
                     return;
 
-                if(update)
+                if (update)
                     await controller.UpdateEntry(data, rtb_reason.Text ?? default);
                 else
                     await controller.InsertEntry(data);

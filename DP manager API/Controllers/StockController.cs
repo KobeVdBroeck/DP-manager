@@ -4,19 +4,17 @@ using DP_manager_API.Entities;
 using DP_manager_API.Models;
 using GraphQL.AspNet.Attributes;
 using GraphQL.AspNet.Controllers;
-using GraphQL.AspNet.Interfaces.Controllers;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Dynamic.Core;
 using System.Text;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DP_manager_API.Controllers;
 
 
 public class StockController(AppDbContext dbContext) : GraphController
 {
-    [QueryRoot("stock")]
-    public Entities.PagedResult<StockEntry> RetrieveStockList(FilterModel<StockEntry> filterModel, SortModel<StockEntry> sortModel, int limit = 100, int page = 1)
+    [QueryRoot("getStock")]
+    public Models.PagedResult<StockEntry> RetrieveStockList(FilterModel<StockEntry> filterModel, SortModel<StockEntry> sortModel, int limit = 100, int page = 1)
     {
         var result = dbContext.StockEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable();
 
@@ -24,12 +22,12 @@ public class StockController(AppDbContext dbContext) : GraphController
             result = result.OrderBy(sortModel.FieldName + " " + sortModel.Direction);
 
         if (filterModel != null)
-            return new Entities.PagedResult<StockEntry>(result.Where(filterModel.BuildFilterFunction()), page, limit, result.Count());
+            return new Models.PagedResult<StockEntry>(result.Where(filterModel.BuildFilterFunction()), page, limit, result.Count());
 
-        return new Entities.PagedResult<StockEntry>(result, page, limit, result.Count());
+        return new Models.PagedResult<StockEntry>(result, page, limit, result.Count());
     }
 
-    [MutationRoot("insertStock")]
+    [MutationRoot("addStock")]
     public StockEntry UpdateStockEntry(StockEntry stock)
     {
         dbContext.StockEntries.Add(stock.WithoutId(""));
@@ -76,8 +74,8 @@ public class StockController(AppDbContext dbContext) : GraphController
         return dbContext.ArchiveEntries.OrderBy("Id").Last();
     }
 
-    [QueryRoot("archive")]
-    public Entities.PagedResult<ArchiveEntry> RetrieveArchiveList(FilterModel<ArchiveEntry> filterModel, SortModel<ArchiveEntry> sortModel, int limit = 100, int page = 1)
+    [QueryRoot("getArchive")]
+    public Models.PagedResult<ArchiveEntry> RetrieveArchiveList(FilterModel<ArchiveEntry> filterModel, SortModel<ArchiveEntry> sortModel, int limit = 100, int page = 1)
     {
         var result = dbContext.ArchiveEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable();
 
@@ -85,29 +83,29 @@ public class StockController(AppDbContext dbContext) : GraphController
             result = result.OrderBy(sortModel.FieldName + " " + sortModel.Direction);
 
         if (filterModel != null)
-            return new Entities.PagedResult<ArchiveEntry>(result.Where(filterModel.BuildFilterFunction()), page, limit, result.Count());
+            return new Models.PagedResult<ArchiveEntry>(result.Where(filterModel.BuildFilterFunction()), page, limit, result.Count());
 
-        return new Entities.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
+        return new Models.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
     }
 
-    [QueryRoot("history")]
-    public Entities.PagedResult<ArchiveEntry> GetStockHistory(string history, int limit = 100, int page = 1)
+    [QueryRoot("getHistory")]
+    public Models.PagedResult<ArchiveEntry> GetStockHistory(string history, int limit = 100, int page = 1)
     {
         var entries = new List<string>();
         var entry = new StringBuilder();
-        foreach(char c in history)
+        foreach (char c in history)
         {
             entry.Append(c);
-            if(c == ';')
+            if (c == ';')
                 entries.Add(entry.ToString());
         }
 
         var result = dbContext.ArchiveEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable().Where(a => entries.Contains(a.History));
 
-        return new Entities.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
+        return new Models.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
     }
 
-    [MutationRoot("split")]
+    [MutationRoot("splitStock")]
     public SplitResponse SplitStock(int id, IEnumerable<StockEntry> newEntries, string? reason)
     {
         var original = dbContext.StockEntries.Find(id);
@@ -118,7 +116,7 @@ public class StockController(AppDbContext dbContext) : GraphController
         dbContext.StockEntries.Remove(original);
         dbContext.ArchiveEntries.Add(original.Adapt(reason));
 
-        foreach(StockEntry entry in newEntries)
+        foreach (StockEntry entry in newEntries)
         {
             var toAdd = entry.WithoutId(original.History + original.Id + ";");
 
@@ -127,10 +125,10 @@ public class StockController(AppDbContext dbContext) : GraphController
 
         dbContext.SaveChanges();
 
-        return new SplitResponse() 
-        { 
-            New = dbContext.StockEntries.OrderBy("Id desc").Take(newEntries.Count()).Reverse(), 
-            Original = dbContext.ArchiveEntries.OrderBy("Id").Last() 
+        return new SplitResponse()
+        {
+            New = dbContext.StockEntries.OrderBy("Id desc").Take(newEntries.Count()).Reverse(),
+            Original = dbContext.ArchiveEntries.OrderBy("Id").Last()
         };
     }
 }

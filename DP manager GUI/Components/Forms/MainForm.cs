@@ -1,29 +1,16 @@
-﻿using GraphQL.Client.Http;
-using GraphQL;
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DP_manager.Components;
 using System.Windows.Forms;
-using GraphQL.Client.Serializer.Newtonsoft;
-using GraphQL.Client.Abstractions;
-using DP_manager.Components;
-using System.Media;
 
 namespace DP_manager
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         ResourceDataGridView<StockResponse, StockEntry> dgv_stock;
         ResourceDataGridView<ArchiveResponse, ArchiveEntry> dgv_archive;
 
-        public Form1(string addr)
+        public MainForm(string addr)
         {
-            GrpcService.Address = addr;
+            GraphQlService.Address = addr;
 
             this.pageControl1 = new PageControl(50);
             this.pageControl2 = new PageControl(50);
