@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS "ArchivedStock"
 (
     "Id" integer UNIQUE GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
     "Worker" character varying(5) DEFAULT null,
-    "Week" character varying(4) NOT NULL,
+    "Week" character varying(10) NOT NULL,
     "Lab" character varying(10) NOT NULL,
     "Location" character varying(20) DEFAULT null,
     "Recipients" integer,

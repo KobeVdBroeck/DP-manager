@@ -13,7 +13,7 @@ namespace DP_manager_API.Controllers;
 
 public class StockController(AppDbContext dbContext) : GraphController
 {
-    [QueryRoot("getStock")]
+    [QueryRoot("stock")]
     public Models.PagedResult<StockEntry> RetrieveStockList(FilterModel<StockEntry> filterModel, SortModel<StockEntry> sortModel, int limit = 100, int page = 1)
     {
         var result = dbContext.StockEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable();
@@ -74,7 +74,7 @@ public class StockController(AppDbContext dbContext) : GraphController
         return dbContext.ArchiveEntries.OrderBy("Id").Last();
     }
 
-    [QueryRoot("getArchive")]
+    [QueryRoot("archive")]
     public Models.PagedResult<ArchiveEntry> RetrieveArchiveList(FilterModel<ArchiveEntry> filterModel, SortModel<ArchiveEntry> sortModel, int limit = 100, int page = 1)
     {
         var result = dbContext.ArchiveEntries.Include(s => s.Plant).Include(s => s.Medium).AsQueryable();
@@ -88,7 +88,7 @@ public class StockController(AppDbContext dbContext) : GraphController
         return new Models.PagedResult<ArchiveEntry>(result, page, limit, result.Count());
     }
 
-    [QueryRoot("getHistory")]
+    [QueryRoot("history")]
     public Models.PagedResult<ArchiveEntry> GetStockHistory(string history, int limit = 100, int page = 1)
     {
         var entries = new List<string>();

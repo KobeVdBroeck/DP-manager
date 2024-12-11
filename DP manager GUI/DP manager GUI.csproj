@@ -203,6 +203,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Forms\SetFilterForm.resx">
       <DependentUpon>SetFilterForm.cs</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SetFilterForm1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\Forms\SetPageForm.resx">
       <DependentUpon>SetPageForm.cs</DependentUpon>
