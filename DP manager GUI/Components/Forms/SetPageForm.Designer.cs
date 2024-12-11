@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetPageForm));
             this.label1 = new System.Windows.Forms.Label();
             this.nud_page = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
@@ -104,6 +105,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nud_page);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SetPageForm";
             this.Text = "SetPageForm";
             ((System.ComponentModel.ISupportInitialize)(this.nud_page)).EndInit();

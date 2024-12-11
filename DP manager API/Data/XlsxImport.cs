@@ -1,5 +1,6 @@
 ﻿using DP_manager_API.Entities;
 using OfficeOpenXml;
+using System.Diagnostics;
 
 namespace DP_manager_API.Data;
 
@@ -20,6 +21,7 @@ public class XlsxImport
             var totalRows = myWorksheet.Dimension.End.Row;
             var totalColumns = myWorksheet.Dimension.End.Column;
             int counter = 1;
+            string week;
 
             for (int rowNum = 2; rowNum <= totalRows; rowNum++)
             {
@@ -49,19 +51,19 @@ public class XlsxImport
                         entry.Worker = data.ElementAt(2).ToString();
                         entry.Location = data.ElementAt(3).ToString();
                         entry.Week = data.ElementAt(7).ToString();
+                        week = entry.Week;
 
                         entry.Recipients = Convert.ToInt32(data.ElementAt(8));
                         entry.Ppr = Convert.ToInt32(data.ElementAt(9));
                         entry.Remarks = (data.ElementAt(10) ?? "").ToString();
 
-                        var plantCode = data.ElementAt(0).ToString();
-                        var plants = appDbContext.PlantEntries.Where(p => p.Code == plantCode);
+                        var plantCode = data.ElementAt(4).ToString();
+                        var plants = appDbContext.PlantEntries.Where(p => p.Code == plantCode).ToList();
                         if (plants.Count() > 0)
                             entry.Plant = plants.First();
                         else
                         {
                             var plant = new Plant() { Code = plantCode };
-                            appDbContext.PlantEntries.Add(plant);
                             entry.Plant = plant;
                         }
 
@@ -72,7 +74,6 @@ public class XlsxImport
                         else
                         {
                             var medium = new Medium() { Id = mediumId };
-                            appDbContext.MediumEntries.Add(medium);
                             entry.Medium = medium;
                         }
 
@@ -83,7 +84,7 @@ public class XlsxImport
 
                         if (isArchive)
                         {
-                            entry.History = (counter + 6000).ToString() + ";";
+                            entry.History = (counter + 9000).ToString() + ";";
                             appDbContext.ArchiveEntries.Add((ArchiveEntry)entry);
                         }
                         else
@@ -104,5 +105,11 @@ public class XlsxImport
                 }
             }
         }
+        GC.Collect();
+    }
+
+    private void Timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+    {
+        throw new NotImplementedException();
     }
 }

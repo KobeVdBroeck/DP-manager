@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HistoryForm));
             this.tlp_stock = new System.Windows.Forms.TableLayoutPanel();
             this.pageControl1 = new DP_manager.Components.PageControl();
             this.tlp_stock.SuspendLayout();
@@ -66,6 +67,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tlp_stock);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HistoryForm";
             this.Text = "HistoryForm";
             this.tlp_stock.ResumeLayout(false);
