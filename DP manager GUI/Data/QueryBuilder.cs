@@ -66,6 +66,7 @@ namespace DP_manager
             sb2.Append(")");
             sb.Insert(index + afterKeyword.Length, sb2.ToString());
 
+            string a = sb.ToString();
             return sb.ToString();
         }
     }

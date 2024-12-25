@@ -4,14 +4,19 @@ using GraphQL.Client.Serializer.Newtonsoft;
 using System;
 using System.Threading.Tasks;
 
+
 namespace DP_manager
 {
     public static class GraphQlService
     {
+        public delegate void Notify();
+
         static GraphQLHttpClient client;
 
         public static bool Connected => client != null;
         public static string Address { set => InitClient(value); }
+
+        public static event Notify Error;
 
         static void InitClient(string address)
         {
@@ -19,7 +24,8 @@ namespace DP_manager
 
             var graphQLHttpClientOptions = new GraphQLHttpClientOptions
             {
-                EndPoint = endpoint
+                EndPoint = endpoint,
+                
             };
 
             client = new GraphQLHttpClient(graphQLHttpClientOptions, new NewtonsoftJsonSerializer());

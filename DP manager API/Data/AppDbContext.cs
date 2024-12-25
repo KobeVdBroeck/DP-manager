@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder.Entity<Plant>(builder =>
         {
             builder.HasKey(p => p.Code);
@@ -46,6 +47,19 @@ public class AppDbContext : DbContext
             builder.ToTable("CurrentStock");
         });
 
+        modelBuilder.Entity<StockToProcess>(builder =>
+        {
+            builder.HasKey(x => x.Id);
+            builder.Property(s => s.StockId).IsRequired();
+            builder.HasOne(s => s.StockEntry)
+                .WithMany()
+                .HasForeignKey(s => s.StockId)
+                .HasPrincipalKey(p => p.Id)
+                .IsRequired();
+
+
+            builder.ToTable("StockToProcess");
+        });
 
         modelBuilder.Entity<ArchiveEntry>().Property(s => s.Id).ValueGeneratedOnAdd();
         modelBuilder.Entity<ArchiveEntry>(builder =>
@@ -76,4 +90,5 @@ public class AppDbContext : DbContext
     public DbSet<Medium> MediumEntries { get; set; }
     public DbSet<StockEntry> StockEntries { get; set; }
     public DbSet<ArchiveEntry> ArchiveEntries { get; set; }
+    public DbSet<StockToProcess> StockToProcessEntries { get; set; }
 }

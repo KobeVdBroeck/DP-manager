@@ -7,6 +7,7 @@ ALTER TABLE IF EXISTS "CurrentStock" DROP CONSTRAINT IF EXISTS None;
 
 ALTER TABLE IF EXISTS "ArchivedStock" DROP CONSTRAINT IF EXISTS None;
 
+DROP TABLE IF EXISTS "StockToProcess";
 DROP TABLE IF EXISTS "ArchivedStock";
 DROP TABLE IF EXISTS "CurrentStock";
 DROP TABLE IF EXISTS "Plant";
@@ -15,8 +16,9 @@ DROP TABLE IF EXISTS "Medium";
 CREATE TABLE IF NOT EXISTS "CurrentStock"
 (
     "Id" integer UNIQUE GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
-    "Worker" character varying(5) DEFAULT null,
     "Week" character varying(4) NOT NULL,
+	"Time" timestamp NOT NULL,
+    "Worker" character varying(5) DEFAULT null,
     "Lab" character varying(10) NOT NULL,
     "Location" character varying(20) DEFAULT null,
     "Recipients" integer,
@@ -31,11 +33,21 @@ CREATE TABLE IF NOT EXISTS "CurrentStock"
     PRIMARY KEY ("Id")
 );
 
+CREATE TABLE IF NOT EXISTS "StockToProcess"
+(
+	"Id" integer UNIQUE GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
+	"StockId" integer NOT NULL,
+	"ProcessBy" timestamp NOT NULL,
+	"CreatedAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY ("Id")
+);
+
 CREATE TABLE IF NOT EXISTS "ArchivedStock"
 (
     "Id" integer UNIQUE GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
-    "Worker" character varying(5) DEFAULT null,
     "Week" character varying(10) NOT NULL,
+	"Time" timestamp NOT NULL,
+    "Worker" character varying(5) DEFAULT null,
     "Lab" character varying(10) NOT NULL,
     "Location" character varying(20) DEFAULT null,
     "Recipients" integer,
@@ -96,6 +108,13 @@ ALTER TABLE IF EXISTS "ArchivedStock"
     REFERENCES "Medium" ("Id") MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION
+    NOT VALID;
+
+ALTER TABLE IF EXISTS "StockToProcess"
+    ADD FOREIGN KEY ("StockId")
+    REFERENCES "CurrentStock" ("Id") MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE
     NOT VALID;
 
 END;

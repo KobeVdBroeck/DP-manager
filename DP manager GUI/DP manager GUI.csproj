@@ -133,6 +133,7 @@
     <Compile Include="Components\Forms\HistoryForm.Designer.cs">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\NotificationScheduler.cs" />
     <Compile Include="Components\ResourceDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -172,6 +173,8 @@
     </Compile>
     <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Models\CountResponse.cs" />
     <Compile Include="Models\HistoryResponse.cs" />
     <Compile Include="Models\IGraphQlResponse.cs" />
     <Compile Include="Models\ArchiveResponse.cs" />
@@ -182,6 +185,9 @@
     <Compile Include="Components\Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\NewNotificationsResponse.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationResponse.cs" />
     <Compile Include="Models\PagedResponse.cs" />
     <Compile Include="Models\SplitResponse.cs" />
     <Compile Include="Data\QueryBuilder.cs" />
@@ -189,6 +195,7 @@
     <Compile Include="Models\StockResponse.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Models\StockEntry.cs" />
+    <Compile Include="Models\Urgency.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\GraphQlService.cs" />

@@ -8,6 +8,7 @@ public class StockEntry
     public int Id { get; set; }
     public string Worker { get; set; }
     public string Week { get; set; }
+	public DateTime Time { get; set; }
     public string Lab { get; set; }
     public string Location { get; set; }
     public int Recipients { get; set; }
