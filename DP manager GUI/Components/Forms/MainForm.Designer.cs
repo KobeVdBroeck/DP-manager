@@ -38,17 +38,23 @@ namespace DP_manager
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tlp_archive = new System.Windows.Forms.TableLayoutPanel();
             this.pageControl2 = new DP_manager.Components.PageControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tlp_notifications = new System.Windows.Forms.TableLayoutPanel();
+            this.pageControl3 = new DP_manager.Components.PageControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tlp_stock.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tlp_archive.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tlp_notifications.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -132,14 +138,52 @@ namespace DP_manager
             this.pageControl2.Size = new System.Drawing.Size(197, 41);
             this.pageControl2.TabIndex = 2;
             // 
-            // Form1
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.tlp_notifications);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1023, 552);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "To Do";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tlp_notifications
+            // 
+            this.tlp_notifications.ColumnCount = 2;
+            this.tlp_notifications.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_notifications.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlp_notifications.Controls.Add(this.pageControl3, 0, 1);
+            this.tlp_notifications.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlp_notifications.Location = new System.Drawing.Point(3, 3);
+            this.tlp_notifications.Name = "tlp_notifications";
+            this.tlp_notifications.RowCount = 2;
+            this.tlp_notifications.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlp_notifications.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tlp_notifications.Size = new System.Drawing.Size(1017, 546);
+            this.tlp_notifications.TabIndex = 3;
+            // 
+            // pageControl3
+            // 
+            this.pageControl3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pageControl3.AutoSize = true;
+            this.pageControl3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pageControl3.Location = new System.Drawing.Point(410, 502);
+            this.pageControl3.Name = "pageControl3";
+            this.pageControl3.Page = 1;
+            this.pageControl3.PageCount = 1;
+            this.pageControl3.Size = new System.Drawing.Size(197, 41);
+            this.pageControl3.TabIndex = 2;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 581);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Denis-Plants stock manager";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -148,6 +192,9 @@ namespace DP_manager
             this.tabPage2.ResumeLayout(false);
             this.tlp_archive.ResumeLayout(false);
             this.tlp_archive.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tlp_notifications.ResumeLayout(false);
+            this.tlp_notifications.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -161,6 +208,9 @@ namespace DP_manager
         private System.Windows.Forms.TableLayoutPanel tlp_archive;
         private PageControl pageControl2;
         private PageControl pageControl1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TableLayoutPanel tlp_notifications;
+        private PageControl pageControl3;
     }
 }
 

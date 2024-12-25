@@ -25,11 +25,13 @@ app.UseAuthorization();
 app.UseGraphQL();
 app.MapControllers();
 
-if (DotEnv.HasVariable("IMPORT"))
+bool import = DotEnv.HasVariable("IMPORT") && DotEnv.GetVariable("IMPORT") == "true";
+if (import)
     using (var scope = app.Services.CreateScope())
     {
         var dbInitializer = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        new XlsxImport(dbInitializer).ImportStock(DotEnv.GetVariable("IMPORT"), DotEnv.GetVariable("IMPORTTARGET"));
+        new XlsxImport(dbInitializer).ImportStock(DotEnv.GetVariable("IMPORTFILE"), DotEnv.GetVariable("IMPORTTARGET"));
+        new MockDataAdder(dbInitializer).AddNotificationMocks();
     }
 
 app.Run();

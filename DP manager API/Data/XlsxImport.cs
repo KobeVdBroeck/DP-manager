@@ -52,6 +52,7 @@ public class XlsxImport
                         entry.Location = data.ElementAt(3).ToString();
                         entry.Week = data.ElementAt(7).ToString();
                         week = entry.Week;
+                        entry.Time = DateTime.Now.ToUniversalTime();
 
                         entry.Recipients = Convert.ToInt32(data.ElementAt(8));
                         entry.Ppr = Convert.ToInt32(data.ElementAt(9));

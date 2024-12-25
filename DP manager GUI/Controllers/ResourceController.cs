@@ -21,7 +21,7 @@ namespace DP_manager
             menuItems = new List<MenuItem>();
         }
 
-        public async Task<TResponse> GetEntries()
+        public virtual async Task<TResponse> GetEntries()
         {
             return await GraphQlService.SendRequestAsync<TResponse>(getQueryBuilder.BuildQuery());
         }
