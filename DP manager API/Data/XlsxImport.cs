@@ -50,9 +50,10 @@ public class XlsxImport
                         entry.Lab = data.ElementAt(0).ToString();
                         entry.Worker = data.ElementAt(2).ToString();
                         entry.Location = data.ElementAt(3).ToString();
-                        entry.Week = data.ElementAt(7).ToString();
-                        week = entry.Week;
-                        entry.Time = DateTime.Now.ToUniversalTime();
+
+                        week = data.ElementAt(7).ToString();
+                        entry.Timestamp = DateTime.Parse($"01/01/20{week.Substring(0, 2)} 00:00:00")
+                            .AddDays(7 * int.Parse(week.Substring(2, 2))).ToUniversalTime();
 
                         entry.Recipients = Convert.ToInt32(data.ElementAt(8));
                         entry.Ppr = Convert.ToInt32(data.ElementAt(9));

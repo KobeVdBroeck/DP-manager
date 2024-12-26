@@ -1,10 +1,12 @@
-﻿namespace DP_manager
+﻿using System;
+
+namespace DP_manager
 {
     public class StockEntry
     {
         public int Id { get; set; }
         public string Worker { get; set; }
-        public string Week { get; set; }
+        public DateTime Timestamp { get; set; }
         public string Lab { get; set; }
         public string Location { get; set; }
         public int Recipients { get; set; }
@@ -23,7 +25,7 @@
             {
                 Id = Id,
                 Worker = Worker,
-                Week = Week,
+                Timestamp = Timestamp,
                 Lab = Lab,
                 Location = Location,
                 Recipients = Recipients,

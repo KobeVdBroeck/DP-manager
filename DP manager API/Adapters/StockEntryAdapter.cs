@@ -21,7 +21,7 @@ public static class StockEntryAdapter
             Ppr = stock.Ppr,
             Recipients = stock.Recipients,
             Remarks = stock.Remarks,
-            Week = stock.Week,
+            Timestamp = stock.Timestamp,
             Worker = stock.Worker
         };
     }

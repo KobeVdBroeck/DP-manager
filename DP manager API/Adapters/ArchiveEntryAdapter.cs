@@ -23,7 +23,7 @@ public static class ArchiveEntryAdapter
             Ppr = stock.Ppr,
             Recipients = stock.Recipients,
             Remarks = stock.Remarks,
-            Week = stock.Week,
+            Timestamp = stock.Timestamp,
             Worker = stock.Worker,
             Reason = reason ?? DEFAULT_REASON,
         };

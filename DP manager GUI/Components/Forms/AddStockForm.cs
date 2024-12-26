@@ -70,8 +70,7 @@ namespace DP_manager.Components
             }
 
             tb_worker.Text = data.Worker;
-            nud_year.Text = data.Week.Substring(0, 2);
-            nud_week.Text = data.Week.Substring(2);
+            dtp.Value = DateTime.UtcNow;
             tb_lab.Text = data.Lab;
             tb_location.Text = data.Location;
             nud_recipients.Text = data.Recipients.ToString();
