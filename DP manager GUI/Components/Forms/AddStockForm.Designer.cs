@@ -51,9 +51,6 @@
             this.tb_remarks = new System.Windows.Forms.TextBox();
             this.tb_history = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.nud_week = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.nud_year = new System.Windows.Forms.NumericUpDown();
             this.tb_lab = new System.Windows.Forms.TextBox();
             this.nud_health = new System.Windows.Forms.NumericUpDown();
             this.nud_recipients = new System.Windows.Forms.NumericUpDown();
@@ -63,10 +60,9 @@
             this.nud_ppr = new System.Windows.Forms.NumericUpDown();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.btn_confirm = new System.Windows.Forms.Button();
+            this.dtp = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_week)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_year)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_health)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_recipients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_phase)).BeginInit();
@@ -193,7 +189,7 @@
             this.label11.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.label11.Size = new System.Drawing.Size(124, 21);
             this.label11.TabIndex = 23;
-            this.label11.Text = "Week:";
+            this.label11.Text = "Timestamp:";
             // 
             // label12
             // 
@@ -337,36 +333,11 @@
             // panel1
             // 
             this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.nud_week);
-            this.panel1.Controls.Add(this.label15);
-            this.panel1.Controls.Add(this.nud_year);
+            this.panel1.Controls.Add(this.dtp);
             this.panel1.Location = new System.Drawing.Point(133, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(151, 25);
+            this.panel1.Size = new System.Drawing.Size(149, 25);
             this.panel1.TabIndex = 34;
-            // 
-            // nud_week
-            // 
-            this.nud_week.Location = new System.Drawing.Point(3, 0);
-            this.nud_week.Name = "nud_week";
-            this.nud_week.Size = new System.Drawing.Size(59, 22);
-            this.nud_week.TabIndex = 48;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(68, 2);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(11, 16);
-            this.label15.TabIndex = 46;
-            this.label15.Text = "/";
-            // 
-            // nud_year
-            // 
-            this.nud_year.Location = new System.Drawing.Point(85, 0);
-            this.nud_year.Name = "nud_year";
-            this.nud_year.Size = new System.Drawing.Size(63, 22);
-            this.nud_year.TabIndex = 47;
             // 
             // tb_lab
             // 
@@ -443,6 +414,14 @@
             this.btn_confirm.UseVisualStyleBackColor = true;
             this.btn_confirm.Click += new System.EventHandler(this.btn_confirm_Click);
             // 
+            // dtp
+            // 
+            this.dtp.CustomFormat = "dd-MM-yyyy hh:mm:ss";
+            this.dtp.Location = new System.Drawing.Point(3, 0);
+            this.dtp.Name = "dtp";
+            this.dtp.Size = new System.Drawing.Size(143, 22);
+            this.dtp.TabIndex = 33;
+            // 
             // AddStockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -457,9 +436,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_week)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_year)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_health)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_recipients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_phase)).EndInit();
@@ -486,11 +462,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lb_reason;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.NumericUpDown nud_week;
         private System.Windows.Forms.TextBox tb_worker;
-        private System.Windows.Forms.NumericUpDown nud_year;
         private System.Windows.Forms.TextBox tb_remarks;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tb_location;
         private System.Windows.Forms.TextBox tb_lab;
         private System.Windows.Forms.NumericUpDown nud_recipients;
@@ -505,5 +478,6 @@
         private System.Windows.Forms.Button btn_confirm;
         private System.Windows.Forms.TextBox tb_history;
         private System.Windows.Forms.RichTextBox rtb_reason;
+        private System.Windows.Forms.DateTimePicker dtp;
     }
 }

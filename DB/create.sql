@@ -16,8 +16,7 @@ DROP TABLE IF EXISTS "Medium";
 CREATE TABLE IF NOT EXISTS "CurrentStock"
 (
     "Id" integer UNIQUE GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
-    "Week" character varying(4) NOT NULL,
-	"Time" timestamp NOT NULL,
+	"Timestamp" timestamp NOT NULL,
     "Worker" character varying(5) DEFAULT null,
     "Lab" character varying(10) NOT NULL,
     "Location" character varying(20) DEFAULT null,
@@ -45,8 +44,7 @@ CREATE TABLE IF NOT EXISTS "StockToProcess"
 CREATE TABLE IF NOT EXISTS "ArchivedStock"
 (
     "Id" integer UNIQUE GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 ),
-    "Week" character varying(10) NOT NULL,
-	"Time" timestamp NOT NULL,
+	"Timestamp" timestamp NOT NULL,
     "Worker" character varying(5) DEFAULT null,
     "Lab" character varying(10) NOT NULL,
     "Location" character varying(20) DEFAULT null,

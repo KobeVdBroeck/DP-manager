@@ -9,11 +9,11 @@ namespace DP_manager
 {
     public class StockController : ResourceController<StockResponse, StockEntry>
     {
-        private static readonly string GETQUERY = "query { stock { result { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks, mediumId, plantCode }, currentPage, pageCount, totalCount } }";
-        private static readonly string UPDATEQUERY = "mutation { updateStock( stock: { id: {0}, worker: \"{1}\", week: \"{2}\", lab: \"{3}\", location: \"{4}\", recipients: {5}, ppr: {6}, category: {7}, phase: {8}, health: {9}, history: \"{10}\", remarks: \"{11}\", mediumId: {12}, plantCode: \"{13}\", } , reason: \"{14}\") { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks }  } ";
-        private static readonly string REMOVEQUERY = "mutation { removeStock( id: {0} , reason: \"{1}\") { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks, reason }  } ";
-        private static readonly string SPLITQUERY = "mutation { splitStock( id: {0}, newEntries: {1}, reason: {2}) { new { id worker week lab location recipients ppr category phase health history remarks medium { id description } mediumId plant { code } plantCode } , original { reason id worker week lab location recipients ppr category phase health history remarks medium { id description } mediumId plant { code } plantCode }  }  } ";
-        private static readonly string INSERTQUERY = "mutation { addStock(stock: { {0} } ) { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks }  } ";
+        private static readonly string GETQUERY = "query { stock { result { id, worker, timestamp, lab, location, recipients, ppr, category, phase, health, history, remarks, mediumId, plantCode }, currentPage, pageCount, totalCount } }";
+        private static readonly string UPDATEQUERY = "mutation { updateStock( stock: { id: {0}, worker: \"{1}\", timestamp: \"{2}\", lab: \"{3}\", location: \"{4}\", recipients: {5}, ppr: {6}, category: {7}, phase: {8}, health: {9}, history: \"{10}\", remarks: \"{11}\", mediumId: {12}, plantCode: \"{13}\", } , reason: \"{14}\") { id, worker, timestamp, lab, location, recipients, ppr, category, phase, health, history, remarks }  } ";
+        private static readonly string REMOVEQUERY = "mutation { removeStock( id: {0} , reason: \"{1}\") { id, worker, timestamp, lab, location, recipients, ppr, category, phase, health, history, remarks, reason }  } ";
+        private static readonly string SPLITQUERY = "mutation { splitStock( id: {0}, newEntries: {1}, reason: {2}) { new { id worker timestamp lab location recipients ppr category phase health history remarks medium { id description } mediumId plant { code } plantCode } , original { reason id worker timestamp lab location recipients ppr category phase health history remarks medium { id description } mediumId plant { code } plantCode }  }  } ";
+        private static readonly string INSERTQUERY = "mutation { addStock(stock: { {0} } ) { id, worker, timestamp, lab, location, recipients, ppr, category, phase, health, history, remarks }  } ";
 
         public StockController() : base()
         {
@@ -36,7 +36,7 @@ namespace DP_manager
             {
                 response.Id,
                 response.Worker,
-                response.Week,
+                response.Timestamp,
                 response.Lab,
                 response.Location,
                 response.Recipients,
