@@ -9,6 +9,21 @@ namespace DP_manager.Components
 {
     public partial class SplitForm : Form, ResourceForm
     {
+        bool cancelled = true;
+        public bool Cancelled { get { return cancelled; } }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            cancelled = true;
+            Close();
+        }
+
+        private void FormIsClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                cancelled = true;
+        }
+
         BindingSource bindingSource = new BindingSource();
 
         public SplitForm(StockController controller)
@@ -25,6 +40,7 @@ namespace DP_manager.Components
             dgv_original.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv_original.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgv_original.RowHeadersVisible = false;
+            FormClosing += FormIsClosing;
         }
 
         private void BindingSource_AddingNew(object sender, AddingNewEventArgs e)
@@ -94,11 +110,6 @@ namespace DP_manager.Components
                 await controller.SplitEntry(data.Id, newEntries, "Split up into more entries.");
                 Close();
             }
-        }
-
-        private void btn_cancel_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void dgv_entries_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)

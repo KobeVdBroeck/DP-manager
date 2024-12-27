@@ -5,6 +5,22 @@ namespace DP_manager.Components
 {
     public partial class AddStockForm : Form, ResourceForm
     {
+
+        bool cancelled = true;
+        public bool Cancelled { get { return cancelled; } }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            cancelled = true;
+            Close();
+        }
+
+        private void FormIsClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                cancelled = true;
+        }
+
         bool update;
 
         StockEntry data;
@@ -41,6 +57,7 @@ namespace DP_manager.Components
             this.controller = controller;
             InitializeComponent();
             this.dtp.Format = DateTimePickerFormat.Custom;
+            FormClosing += FormIsClosing;
         }
 
         public Form Reconstruct()
@@ -100,11 +117,6 @@ namespace DP_manager.Components
                     await controller.InsertEntry(data);
             }
 
-            Close();
-        }
-
-        private void btn_cancel_Click(object sender, EventArgs e)
-        {
             Close();
         }
 

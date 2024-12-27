@@ -5,6 +5,21 @@ namespace DP_manager.Components
 {
     public partial class ArchiveStockForm : Form, ResourceForm
     {
+        bool cancelled = true;
+        public bool Cancelled { get { return cancelled; } }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            cancelled = true;
+            Close();
+        }
+
+        private void FormIsClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                cancelled = true;
+        }
+
         int data = 0;
         public object Data
         {
@@ -32,6 +47,7 @@ namespace DP_manager.Components
         {
             this.controller = controller;
             InitializeComponent();
+            FormClosing += FormIsClosing;
         }
 
         public Form Reconstruct()
@@ -64,11 +80,6 @@ namespace DP_manager.Components
                 await controller.RemoveEntry(data, rtb_reason.Text ?? "");
             }
 
-            Close();
-        }
-
-        private void btn_cancel_Click(object sender, EventArgs e)
-        {
             Close();
         }
 
