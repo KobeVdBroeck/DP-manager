@@ -34,13 +34,17 @@ namespace DP_manager
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tlp_stock = new System.Windows.Forms.TableLayoutPanel();
-            this.pageControl1 = new DP_manager.Components.PageControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tlp_archive = new System.Windows.Forms.TableLayoutPanel();
-            this.pageControl2 = new DP_manager.Components.PageControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tlp_notifications = new System.Windows.Forms.TableLayoutPanel();
+            this.pageControl1 = new DP_manager.Components.PageControl();
+            this.pageControl2 = new DP_manager.Components.PageControl();
             this.pageControl3 = new DP_manager.Components.PageControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tlp_stock.SuspendLayout();
@@ -48,6 +52,8 @@ namespace DP_manager
             this.tlp_archive.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tlp_notifications.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -55,6 +61,7 @@ namespace DP_manager
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -88,18 +95,6 @@ namespace DP_manager
             this.tlp_stock.Size = new System.Drawing.Size(1017, 546);
             this.tlp_stock.TabIndex = 1;
             // 
-            // pageControl1
-            // 
-            this.pageControl1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pageControl1.AutoSize = true;
-            this.pageControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pageControl1.Location = new System.Drawing.Point(410, 502);
-            this.pageControl1.Name = "pageControl1";
-            this.pageControl1.Page = 1;
-            this.pageControl1.PageCount = 1;
-            this.pageControl1.Size = new System.Drawing.Size(197, 41);
-            this.pageControl1.TabIndex = 2;
-            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tlp_archive);
@@ -125,18 +120,6 @@ namespace DP_manager
             this.tlp_archive.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlp_archive.Size = new System.Drawing.Size(1017, 546);
             this.tlp_archive.TabIndex = 2;
-            // 
-            // pageControl2
-            // 
-            this.pageControl2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.pageControl2.AutoSize = true;
-            this.pageControl2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.pageControl2.Location = new System.Drawing.Point(410, 502);
-            this.pageControl2.Name = "pageControl2";
-            this.pageControl2.Page = 1;
-            this.pageControl2.PageCount = 1;
-            this.pageControl2.Size = new System.Drawing.Size(197, 41);
-            this.pageControl2.TabIndex = 2;
             // 
             // tabPage3
             // 
@@ -164,6 +147,30 @@ namespace DP_manager
             this.tlp_notifications.Size = new System.Drawing.Size(1017, 546);
             this.tlp_notifications.TabIndex = 3;
             // 
+            // pageControl1
+            // 
+            this.pageControl1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pageControl1.AutoSize = true;
+            this.pageControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pageControl1.Location = new System.Drawing.Point(410, 502);
+            this.pageControl1.Name = "pageControl1";
+            this.pageControl1.Page = 1;
+            this.pageControl1.PageCount = 1;
+            this.pageControl1.Size = new System.Drawing.Size(197, 41);
+            this.pageControl1.TabIndex = 2;
+            // 
+            // pageControl2
+            // 
+            this.pageControl2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.pageControl2.AutoSize = true;
+            this.pageControl2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.pageControl2.Location = new System.Drawing.Point(410, 502);
+            this.pageControl2.Name = "pageControl2";
+            this.pageControl2.Page = 1;
+            this.pageControl2.PageCount = 1;
+            this.pageControl2.Size = new System.Drawing.Size(197, 41);
+            this.pageControl2.TabIndex = 2;
+            // 
             // pageControl3
             // 
             this.pageControl3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
@@ -175,6 +182,44 @@ namespace DP_manager
             this.pageControl3.PageCount = 1;
             this.pageControl3.Size = new System.Drawing.Size(197, 41);
             this.pageControl3.TabIndex = 2;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.dataGridView1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(1023, 552);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+            this.dataGridView1.Location = new System.Drawing.Point(180, 89);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(375, 240);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Column1";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Column2";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 125;
             // 
             // MainForm
             // 
@@ -195,6 +240,8 @@ namespace DP_manager
             this.tabPage3.ResumeLayout(false);
             this.tlp_notifications.ResumeLayout(false);
             this.tlp_notifications.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -211,6 +258,10 @@ namespace DP_manager
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TableLayoutPanel tlp_notifications;
         private PageControl pageControl3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }
 

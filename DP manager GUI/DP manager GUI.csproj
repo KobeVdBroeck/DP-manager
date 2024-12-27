@@ -133,6 +133,7 @@
     <Compile Include="Components\Forms\HistoryForm.Designer.cs">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Forms\LoadingLabel.cs" />
     <Compile Include="Components\NotificationScheduler.cs" />
     <Compile Include="Components\ResourceDataGridView.cs">
       <SubType>Component</SubType>

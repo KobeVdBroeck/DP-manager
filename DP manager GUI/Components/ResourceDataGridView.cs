@@ -1,7 +1,12 @@
-﻿using System;
+﻿using DP_manager.Components.Forms;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -9,6 +14,7 @@ namespace DP_manager.Components
     internal class ResourceDataGridView<TResponse, TEntity> : DataGridView where TResponse : IGraphQlResponse
     {
         private BindingSource bindingSource = new BindingSource();
+        private BindingSource loadingSource = new BindingSource();
         private ResourceController<TResponse, TEntity> resourceController;
         private PageControl pageControl;
         private ContextMenu headerContextMenu = new ContextMenu();
@@ -18,6 +24,31 @@ namespace DP_manager.Components
         private string sortDirection = "";
         private int sortedColumn = -1;
         private bool columnsInitialized = false;
+
+        private bool isLoading = false;
+        private bool IsLoading
+        {
+            get { return isLoading; } 
+            set 
+            { 
+                if(isLoading == value)
+                    return;
+
+                if (value)
+                {
+                    var label = new LoadingLabel();
+                    label.Timer.Elapsed += new ElapsedEventHandler((object o, ElapsedEventArgs e) =>
+                    {
+                        Refresh();
+                    });
+                    bindingSource.DataSource = new BindingList<object>() { label };
+                }
+
+                
+                Enabled = !value;
+                isLoading = value; 
+            }
+        }
 
         public ResourceDataGridView(PageControl pageControl, ResourceController<TResponse, TEntity> controller) : base()
         {
@@ -124,6 +155,10 @@ namespace DP_manager.Components
 
         public async void UpdateData()
         {
+            IsLoading = true;
+            Refresh();
+
+            await Task.Delay(5000);
             var data = await resourceController.GetEntries();
             var (page, pageCount) = data.GetPageInfo();
 
@@ -141,8 +176,6 @@ namespace DP_manager.Components
                 columnsInitialized = true;
             }
 
-            Refresh();
-
             if (sortDirection != "" && !Columns[sortedColumn].HeaderText.EndsWith("▲") && !Columns[sortedColumn].HeaderText.EndsWith("▼"))
                 Columns[sortedColumn].HeaderText += sortDirection == "asc" ? "▲" : "▼";
 
@@ -150,6 +183,8 @@ namespace DP_manager.Components
                 ((DataGridViewColumn)col).MinimumWidth = 2;
 
             ApplyFilterText();
+
+            IsLoading = false;
         }
 
         private void ApplyFilterText()
