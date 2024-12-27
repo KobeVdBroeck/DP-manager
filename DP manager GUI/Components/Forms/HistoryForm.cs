@@ -7,6 +7,21 @@ namespace DP_manager.Components
 {
     public partial class HistoryForm : Form, ResourceForm
     {
+        bool cancelled = true;
+        public bool Cancelled { get { return cancelled; } }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            cancelled = true;
+            Close();
+        }
+
+        private void FormIsClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+                cancelled = true;
+        }
+
         ResourceDataGridView<HistoryResponse, ArchiveEntry> dgv_stock;
 
         public HistoryForm(HistoryController controller)
@@ -14,6 +29,7 @@ namespace DP_manager.Components
             this.pageControl1 = new PageControl(50);
             Controller = controller;
             InitializeComponent();
+            FormClosing += FormIsClosing;
         }
 
         StockEntry data;

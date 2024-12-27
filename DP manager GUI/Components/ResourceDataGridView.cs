@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -37,10 +36,7 @@ namespace DP_manager.Components
                 if (value)
                 {
                     var label = new LoadingLabel();
-                    label.Timer.Elapsed += new ElapsedEventHandler((object o, ElapsedEventArgs e) =>
-                    {
-                        Refresh();
-                    });
+                    label.Timer.Elapsed += Timer_Elapsed;
                     bindingSource.DataSource = new BindingList<object>() { label };
                 }
 
@@ -48,6 +44,11 @@ namespace DP_manager.Components
                 Enabled = !value;
                 isLoading = value; 
             }
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            Refresh();
         }
 
         public ResourceDataGridView(PageControl pageControl, ResourceController<TResponse, TEntity> controller) : base()
@@ -158,7 +159,7 @@ namespace DP_manager.Components
             IsLoading = true;
             Refresh();
 
-            await Task.Delay(5000);
+            // await Task.Delay(5000); // Test delay
             var data = await resourceController.GetEntries();
             var (page, pageCount) = data.GetPageInfo();
 
@@ -286,6 +287,9 @@ namespace DP_manager.Components
 
         private void Form_Close(object sender, EventArgs e)
         {
+            if (((ResourceForm) sender).Cancelled)
+                return;
+
             UpdateData();
         }
     }

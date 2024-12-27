@@ -8,14 +8,17 @@ namespace DP_manager.Components
 {
     public partial class SetFilterForm<TResponse, TEntity> : Form, ResourceForm
     {
-        (StockEntry entry, string field) data;
+        bool cancelled = true;
+        public bool Cancelled { get { return cancelled; } }
+
+        (TEntity entry, string field) data;
         public object Data
         {
             get { return data; }
             set
             {
                 var tupleVal = ((object entry, string field))value;
-                data = ((StockEntry)tupleVal.entry, tupleVal.field);
+                data = ((TEntity)tupleVal.entry, tupleVal.field);
                 InitComboBox();
             }
         }
@@ -34,8 +37,8 @@ namespace DP_manager.Components
         {
             InitializeComponent();
             Controller = controller;
+            this.FormClosing += FormIsClosing;
         }
-
 
         new public bool IsDisposed => base.IsDisposed;
         public bool IsVisible => base.Visible;
@@ -89,7 +92,14 @@ namespace DP_manager.Components
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
+            cancelled = true;
             Close();
+        }
+
+        private void FormIsClosing(object sender, FormClosingEventArgs e)
+        {
+            if(e.CloseReason == CloseReason.UserClosing)
+                cancelled = true;
         }
     }
 }
