@@ -36,7 +36,7 @@ namespace DP_manager.Components
 
             DefaultCellStyle.ApplyStyle(new DataGridViewCellStyle()
             {
-                SelectionBackColor = Color.LightGreen,
+                SelectionBackColor = Color.YellowGreen,
                 SelectionForeColor = Color.Black
             });
 
@@ -69,7 +69,6 @@ namespace DP_manager.Components
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             Point location = PointToClient(MousePosition);
-            var hit = HitTest(location.X, location.Y);
             location.Offset(5, 5);
 
             if (e.Control)
@@ -136,7 +135,9 @@ namespace DP_manager.Components
             if (!columnsInitialized)
             {
                 foreach (var item in Columns)
-                    ((DataGridViewColumn)item).MinimumWidth = 40;
+                {
+                    ((DataGridViewColumn)item).MinimumWidth = 10;
+                }
                 columnsInitialized = true;
             }
 

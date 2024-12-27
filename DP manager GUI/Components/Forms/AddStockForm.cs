@@ -40,6 +40,7 @@ namespace DP_manager.Components
             this.update = update;
             this.controller = controller;
             InitializeComponent();
+            this.dtp.Format = DateTimePickerFormat.Custom;
         }
 
         public Form Reconstruct()

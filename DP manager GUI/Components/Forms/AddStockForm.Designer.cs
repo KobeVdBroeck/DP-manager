@@ -51,6 +51,7 @@
             this.tb_remarks = new System.Windows.Forms.TextBox();
             this.tb_history = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dtp = new System.Windows.Forms.DateTimePicker();
             this.tb_lab = new System.Windows.Forms.TextBox();
             this.nud_health = new System.Windows.Forms.NumericUpDown();
             this.nud_recipients = new System.Windows.Forms.NumericUpDown();
@@ -60,7 +61,6 @@
             this.nud_ppr = new System.Windows.Forms.NumericUpDown();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.btn_confirm = new System.Windows.Forms.Button();
-            this.dtp = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_health)).BeginInit();
@@ -280,7 +280,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(287, 435);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(432, 435);
             this.tableLayoutPanel1.TabIndex = 32;
             // 
             // rtb_reason
@@ -288,7 +288,7 @@
             this.rtb_reason.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_reason.Location = new System.Drawing.Point(133, 374);
             this.rtb_reason.Name = "rtb_reason";
-            this.rtb_reason.Size = new System.Drawing.Size(151, 24);
+            this.rtb_reason.Size = new System.Drawing.Size(296, 24);
             this.rtb_reason.TabIndex = 33;
             this.rtb_reason.Text = "";
             this.rtb_reason.ContentsResized += new System.Windows.Forms.ContentsResizedEventHandler(this.rtb_reason_ContentsResized);
@@ -336,8 +336,16 @@
             this.panel1.Controls.Add(this.dtp);
             this.panel1.Location = new System.Drawing.Point(133, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(149, 25);
+            this.panel1.Size = new System.Drawing.Size(296, 25);
             this.panel1.TabIndex = 34;
+            // 
+            // dtp
+            // 
+            this.dtp.CustomFormat = "dd-MM-yyyy hh:mm:ss";
+            this.dtp.Location = new System.Drawing.Point(3, 0);
+            this.dtp.Name = "dtp";
+            this.dtp.Size = new System.Drawing.Size(290, 22);
+            this.dtp.TabIndex = 33;
             // 
             // tb_lab
             // 
@@ -408,19 +416,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_confirm.Location = new System.Drawing.Point(133, 404);
             this.btn_confirm.Name = "btn_confirm";
-            this.btn_confirm.Size = new System.Drawing.Size(151, 28);
+            this.btn_confirm.Size = new System.Drawing.Size(296, 28);
             this.btn_confirm.TabIndex = 50;
             this.btn_confirm.Text = "Confirm";
             this.btn_confirm.UseVisualStyleBackColor = true;
             this.btn_confirm.Click += new System.EventHandler(this.btn_confirm_Click);
-            // 
-            // dtp
-            // 
-            this.dtp.CustomFormat = "dd-MM-yyyy hh:mm:ss";
-            this.dtp.Location = new System.Drawing.Point(3, 0);
-            this.dtp.Name = "dtp";
-            this.dtp.Size = new System.Drawing.Size(143, 22);
-            this.dtp.TabIndex = 33;
             // 
             // AddStockForm
             // 
