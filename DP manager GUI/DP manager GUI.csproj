@@ -174,10 +174,13 @@
     <Compile Include="Controllers\ArchiveController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
-    <Compile Include="Models\CountResponse.cs" />
-    <Compile Include="Models\HistoryResponse.cs" />
-    <Compile Include="Models\IGraphQlResponse.cs" />
-    <Compile Include="Models\ArchiveResponse.cs" />
+    <Compile Include="Models\Enums\Phase.cs" />
+    <Compile Include="Models\Enums\Category.cs" />
+    <Compile Include="Models\Enums\Health.cs" />
+    <Compile Include="Models\Responses\CountResponse.cs" />
+    <Compile Include="Models\Responses\HistoryResponse.cs" />
+    <Compile Include="Models\Responses\IGraphQlResponse.cs" />
+    <Compile Include="Models\Responses\ArchiveResponse.cs" />
     <Compile Include="Models\ArchiveEntry.cs" />
     <Compile Include="Components\Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -185,17 +188,17 @@
     <Compile Include="Components\Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\NewNotificationsResponse.cs" />
+    <Compile Include="Models\Responses\NewNotificationsResponse.cs" />
     <Compile Include="Models\Notification.cs" />
-    <Compile Include="Models\NotificationResponse.cs" />
-    <Compile Include="Models\PagedResponse.cs" />
-    <Compile Include="Models\SplitResponse.cs" />
+    <Compile Include="Models\Responses\NotificationResponse.cs" />
+    <Compile Include="Models\Responses\PagedResponse.cs" />
+    <Compile Include="Models\Responses\SplitResponse.cs" />
     <Compile Include="Data\QueryBuilder.cs" />
     <Compile Include="Controllers\ResourceController.cs" />
-    <Compile Include="Models\StockResponse.cs" />
+    <Compile Include="Models\Responses\StockResponse.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Models\StockEntry.cs" />
-    <Compile Include="Models\Urgency.cs" />
+    <Compile Include="Models\Enums\Urgency.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data\GraphQlService.cs" />

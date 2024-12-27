@@ -26,7 +26,7 @@ namespace DP_manager
             menuItems.Add(new FormBoundMenuItem("Split", new SplitForm(this)));
             menuItems.Add(new FormBoundMenuItem("New entry", new AddStockForm(this, false)));
 
-            SetSort("Id", "asc");
+            SetSort("Timestamp", "desc");
         }
 
 

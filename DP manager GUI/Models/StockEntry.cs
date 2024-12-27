@@ -1,9 +1,13 @@
-﻿using System;
+﻿using DP_manager.Interfaces;
+using System;
+using System.ComponentModel;
 
 namespace DP_manager
 {
+    
     public class StockEntry
     {
+        [Browsable(false)]
         public int Id { get; set; }
         public string Worker { get; set; }
         public DateTime Timestamp { get; set; }
@@ -11,9 +15,10 @@ namespace DP_manager
         public string Location { get; set; }
         public int Recipients { get; set; }
         public int Ppr { get; set; }
-        public int Category { get; set; }
-        public int Phase { get; set; }
-        public int Health { get; set; }
+        public Category Category { get; set; }
+        public Phase Phase { get; set; }
+        public Health Health { get; set; }
+        [Browsable(false)]
         public string History { get; set; }
         public string Remarks { get; set; }
         public string PlantCode { get; set; }

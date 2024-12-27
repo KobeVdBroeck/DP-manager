@@ -104,7 +104,6 @@ namespace DP_manager.Components
         private void dgv_entries_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             int row = e.RowIndex;
-            int column = e.ColumnIndex;
 
             dgv_entries.Rows[row].DefaultCellStyle = new DataGridViewCellStyle() { BackColor = Color.OrangeRed };
 
