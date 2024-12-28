@@ -31,6 +31,11 @@ namespace DP_manager.Controllers
             SetSort("Id", "asc");
         }
 
+        public void DisposeOfIcon()
+        {
+            scheduler.DisposeOfIcon();
+        }
+
         private async void Scheduler_Notified()
         {
             await UpdateNotifications();

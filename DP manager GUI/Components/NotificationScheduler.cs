@@ -43,6 +43,11 @@ namespace DP_manager.Components
             timer.Elapsed += ShowNotification;
         }
 
+        public void DisposeOfIcon()
+        {
+            icon.Visible = false;
+        }
+
         public void ScheduleFutureNotifications(List<Models.Notification> notifications)
         {
             timer.Stop();
