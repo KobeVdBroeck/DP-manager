@@ -11,9 +11,12 @@ namespace DP_manager
         ResourceDataGridView<StockResponse, StockEntry> dgv_stock;
         ResourceDataGridView<ArchiveResponse, ArchiveEntry> dgv_archive;
         ResourceDataGridView<NotificationResponse, Notification> dgv_notifications;
+        NotificationController notifController = new NotificationController();
 
         public MainForm(string addr)
         {
+            FormClosing += MainForm_FormClosing;
+
             GraphQlService.Address = addr;
 
             this.pageControl1 = new PageControl(50);
@@ -23,10 +26,15 @@ namespace DP_manager
             InitializeComponent();
             dgv_stock = new ResourceDataGridView<StockResponse, StockEntry>(pageControl1, new StockController()) { TabIndex = 1 };
             dgv_archive = new ResourceDataGridView<ArchiveResponse, ArchiveEntry>(pageControl2, new ArchiveController()) { TabIndex = 1 };
-            dgv_notifications = new ResourceDataGridView<NotificationResponse, Notification>(pageControl3, new NotificationController()) { TabIndex = 1 };
+            dgv_notifications = new ResourceDataGridView<NotificationResponse, Notification>(pageControl3, notifController) { TabIndex = 1 };
             tlp_stock.Controls.Add(dgv_stock, 0, 0);
             tlp_archive.Controls.Add(dgv_archive, 0, 0);
             tlp_notifications.Controls.Add(dgv_notifications, 0, 0);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            notifController.DisposeOfIcon();
         }
     }
 }
