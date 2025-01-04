@@ -1,11 +1,12 @@
 ﻿using DP_manager.Interfaces;
+using DP_manager.Models;
 using System;
 using System.ComponentModel;
 
 namespace DP_manager
 {
     
-    public class StockEntry
+    public class StockEntry : Exportable
     {
         [Browsable(false)]
         public int Id { get; set; }

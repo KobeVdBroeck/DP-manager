@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2793AF3C-1E59-4479-BC77-D62143BE4FC3}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>DP_manager</RootNamespace>
     <AssemblyName>DP manager</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
@@ -127,6 +127,12 @@
     <Compile Include="Components\Forms\ArchiveStockForm.Designer.cs">
       <DependentUpon>ArchiveStockForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\Forms\ExportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\Forms\ExportForm.Designer.cs">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\Forms\HistoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,12 +179,15 @@
       <DependentUpon>AddStockForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ArchiveController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\HistoryController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Models\Enums\Phase.cs" />
     <Compile Include="Models\Enums\Category.cs" />
     <Compile Include="Models\Enums\Health.cs" />
+    <Compile Include="Models\Exportable.cs" />
     <Compile Include="Models\Responses\CountResponse.cs" />
+    <Compile Include="Models\Responses\ExportResponse.cs" />
     <Compile Include="Models\Responses\HistoryResponse.cs" />
     <Compile Include="Models\Responses\IGraphQlResponse.cs" />
     <Compile Include="Models\Responses\ArchiveResponse.cs" />

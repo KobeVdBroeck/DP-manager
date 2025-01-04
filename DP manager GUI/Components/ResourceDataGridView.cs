@@ -1,4 +1,5 @@
 ﻿using DP_manager.Components.Forms;
+using DP_manager.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -89,6 +90,10 @@ namespace DP_manager.Components
             resourceController.SetPaging(pageControl.Page, pageControl.PageLimit);
 
             headerContextMenu.MenuItems.Add(new FormBoundMenuItem("Add filter", new SetFilterForm<TResponse, TEntity>(resourceController)));
+            if(typeof(Exportable).IsAssignableFrom(typeof(TEntity)))
+            {
+                headerContextMenu.MenuItems.Add(new FormBoundMenuItem("Export data", new ExportForm(Exportable.GetTableName(typeof(TEntity).Name))));
+            }
             foreach (var menuItem in headerContextMenu.MenuItems)
             {
                 var item = (FormBoundMenuItem)menuItem;
