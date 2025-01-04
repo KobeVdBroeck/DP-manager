@@ -56,8 +56,8 @@ public class XlsxImport
                             .AddDays(7 * int.Parse(week.Substring(2, 2))).ToUniversalTime();
 
                         entry.Recipients = Convert.ToInt32(data.ElementAt(8));
-                        entry.Ppr = Convert.ToInt32(data.ElementAt(9));
-                        entry.Remarks = (data.ElementAt(10) ?? "").ToString();
+                        entry.Ppr = Convert.ToInt32(data.ElementAt(10));
+                        entry.Remarks = (data.ElementAt(12) ?? "").ToString();
 
                         var plantCode = data.ElementAt(4).ToString();
                         var plants = appDbContext.PlantEntries.Where(p => p.Code == plantCode).ToList();
