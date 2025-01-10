@@ -33,7 +33,7 @@ namespace DP_manager
 
         public static async Task<T> SendRequestAsync<T>(string query)
         {
-            var request = new GraphQLRequest { Query = new GraphQLQuery(query) };
+            var request = new GraphQLRequest() { Query = new GraphQLQuery(query) };
 
             var response = await client.SendQueryAsync<T>(request);
 

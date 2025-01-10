@@ -4,7 +4,7 @@ namespace DP_manager.Controllers
 {
     public class HistoryController : ResourceController<HistoryResponse, ArchiveEntry>
     {
-        private static readonly string GETQUERY = "query { history { result { id, worker, week, lab, location, recipients, ppr, category, phase, health, history, remarks }, currentPage, pageCount, totalCount, pageLimit }  } ";
+        private static readonly string GETQUERY = "query { history { result { id, worker, timestamp, lab, location, recipients, ppr, category, phase, health, history, remarks }, currentPage, pageCount, totalCount, pageLimit }  } ";
 
         string history;
         public string History
@@ -15,7 +15,6 @@ namespace DP_manager.Controllers
                 history = value;
                 getQueryBuilder.AddArgument("history", "\"" + value + "\"", true);
                 var a = getQueryBuilder.BuildQuery();
-                var b = 1;
             }
         }
 

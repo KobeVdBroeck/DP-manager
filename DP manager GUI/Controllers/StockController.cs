@@ -36,18 +36,18 @@ namespace DP_manager
             {
                 response.Id,
                 response.Worker,
-                response.Timestamp,
+                response.Timestamp.ToUniversalTime(),
                 response.Lab,
                 response.Location,
                 response.Recipients,
                 response.Ppr,
-                response.Category,
-                response.Phase,
-                response.Health,
+                (int)response.Category,
+                (int)response.Phase,
+                (int)response.Health,
                 response.History,
                 response.Remarks,
-                1125,
-                "0DP",
+                response.MediumId,
+                response.PlantCode,
                 reason
             };
 

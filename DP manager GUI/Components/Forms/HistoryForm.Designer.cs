@@ -69,7 +69,7 @@
             this.Controls.Add(this.tlp_stock);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HistoryForm";
-            this.Text = "HistoryForm";
+            this.Text = "Stock history";
             this.tlp_stock.ResumeLayout(false);
             this.tlp_stock.PerformLayout();
             this.ResumeLayout(false);

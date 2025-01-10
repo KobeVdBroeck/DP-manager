@@ -11,13 +11,14 @@ namespace DP_manager
         ResourceDataGridView<StockResponse, StockEntry> dgv_stock;
         ResourceDataGridView<ArchiveResponse, ArchiveEntry> dgv_archive;
         ResourceDataGridView<NotificationResponse, Notification> dgv_notifications;
-        NotificationController notifController = new NotificationController();
+        NotificationController notifController;
 
         public MainForm(string addr)
         {
             FormClosing += MainForm_FormClosing;
 
             GraphQlService.Address = addr;
+            notifController = new NotificationController();
 
             this.pageControl1 = new PageControl(50);
             this.pageControl2 = new PageControl(50);

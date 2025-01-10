@@ -107,7 +107,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SetPageForm";
-            this.Text = "SetPageForm";
+            this.Text = "Set page";
             ((System.ComponentModel.ISupportInitialize)(this.nud_page)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

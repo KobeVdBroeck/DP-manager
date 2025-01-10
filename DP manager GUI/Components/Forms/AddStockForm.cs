@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DP_manager.Interfaces;
+using System;
 using System.Windows.Forms;
 
 namespace DP_manager.Components
@@ -98,8 +99,29 @@ namespace DP_manager.Components
             nud_health.Text = data.Health.ToString();
             tb_history.Text = data.History;
             tb_remarks.Text = data.Remarks;
-            cb_plantCode.Text = "todo";
-            cb_mediumId.Text = "todo";
+            cb_plantCode.Text = data.PlantCode;
+            cb_mediumId.Text = data.MediumId.ToString();
+        }
+
+        private StockEntry ReadData()
+        {
+            return new StockEntry()
+            {
+                Id = data.Id,
+                Worker = tb_worker.Text,
+                Timestamp = dtp.Value,
+                Lab = tb_lab.Text,
+                Location = tb_location.Text,
+                Recipients = (int)nud_recipients.Value,
+                Ppr = (int)nud_ppr.Value,
+                Category = (Category)nud_category.Value,
+                Phase = (Phase)(int)nud_phase.Value,
+                Health = (Health)nud_health.Value,
+                History = tb_history.Text,
+                Remarks = tb_remarks.Text,
+                PlantCode = cb_plantCode.Text,
+                MediumId = int.Parse(cb_mediumId.Text),
+            };
         }
 
         private async void btn_confirm_Click(object sender, EventArgs e)
@@ -112,9 +134,9 @@ namespace DP_manager.Components
                     return;
 
                 if (update)
-                    await controller.UpdateEntry(data, rtb_reason.Text ?? default);
+                    await controller.UpdateEntry(ReadData(), rtb_reason.Text ?? default);
                 else
-                    await controller.InsertEntry(data);
+                    await controller.InsertEntry(ReadData());
             }
 
             Close();

@@ -37,7 +37,6 @@ namespace DP_manager.Components
         {
             InitializeComponent();
             Controller = controller;
-            this.FormClosing += FormIsClosing;
         }
 
         new public bool IsDisposed => base.IsDisposed;
@@ -86,6 +85,7 @@ namespace DP_manager.Components
             }
 
             controller.SetFilter((string)cb_fields.SelectedItem, tb_value.Text);
+            cancelled = false;
 
             Close();
         }
@@ -94,12 +94,6 @@ namespace DP_manager.Components
         {
             cancelled = true;
             Close();
-        }
-
-        private void FormIsClosing(object sender, FormClosingEventArgs e)
-        {
-            if(e.CloseReason == CloseReason.UserClosing)
-                cancelled = true;
         }
     }
 }

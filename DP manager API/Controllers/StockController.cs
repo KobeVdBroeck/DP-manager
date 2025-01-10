@@ -49,7 +49,7 @@ public class StockController(AppDbContext dbContext) : GraphController
 
         var archive = toUpdate.Adapt(reason);
         dbContext.ArchiveEntries.Add(archive);
-        dbContext.StockEntries.Add(toUpdate.WithoutId(toUpdate.History + toUpdate.Id + ";"));
+        dbContext.StockEntries.Add(stock.WithoutId(toUpdate.History + toUpdate.Id + ";"));
 
         dbContext.SaveChanges();
 

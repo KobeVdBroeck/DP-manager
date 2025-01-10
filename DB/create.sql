@@ -7,6 +7,10 @@ ALTER TABLE IF EXISTS "CurrentStock" DROP CONSTRAINT IF EXISTS None;
 
 ALTER TABLE IF EXISTS "ArchivedStock" DROP CONSTRAINT IF EXISTS None;
 
+CREATE EXTENSION IF NOT EXISTS pg_trgm; 
+
+DROP INDEX IF EXISTS archive_history_index;
+DROP INDEX IF EXISTS stock_history_index;
 DROP TABLE IF EXISTS "StockToProcess";
 DROP TABLE IF EXISTS "ArchivedStock";
 DROP TABLE IF EXISTS "CurrentStock";
@@ -114,6 +118,10 @@ ALTER TABLE IF EXISTS "StockToProcess"
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID;
+
+
+CREATE INDEX archive_history_index ON "ArchivedStock" USING gist ("History" gist_trgm_ops);
+CREATE INDEX stock_history_index ON "CurrentStock" USING gist ("History" gist_trgm_ops);
 
 END;
 

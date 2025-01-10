@@ -7,7 +7,13 @@ public class StockEntry
 {
     public int Id { get; set; }
     public string Worker { get; set; }
-	public DateTime Timestamp { get; set; }
+    private DateTime dt;
+	public DateTime Timestamp { get => dt; 
+        set
+        {
+            dt = value.ToUniversalTime();
+        }
+    }
     public string Lab { get; set; }
     public string Location { get; set; }
     public int Recipients { get; set; }
