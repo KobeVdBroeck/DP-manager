@@ -29,6 +29,7 @@ namespace DP_manager.Components
         private void button1_Click(object sender, EventArgs e)
         {
             result = (int)nud_page.Value;
+            Close();
         }
 
         private void button2_Click(object sender, EventArgs e)

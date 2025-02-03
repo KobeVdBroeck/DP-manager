@@ -161,9 +161,6 @@ namespace DP_manager.Components
 
         public async void UpdateData()
         {
-            IsLoading = true;
-            Refresh();
-
             // await Task.Delay(5000); // Test delay
             var data = await resourceController.GetEntries();
             var (page, pageCount) = data.GetPageInfo();
@@ -191,6 +188,8 @@ namespace DP_manager.Components
             ApplyFilterText();
 
             IsLoading = false;
+            Refresh();
+            GC.Collect();
         }
 
         private void ApplyFilterText()
@@ -269,7 +268,9 @@ namespace DP_manager.Components
                 formMenuItem.Form.Data = entity;
                 formMenuItem.Form.Show();
                 formMenuItem.Form.Close += Form_Close;
+
             }
+
         }
 
         private void HeaderMenuItem_Click(object sender, EventArgs e)
@@ -292,9 +293,6 @@ namespace DP_manager.Components
 
         private void Form_Close(object sender, EventArgs e)
         {
-            if (((ResourceForm) sender).Cancelled)
-                return;
-
             UpdateData();
         }
     }

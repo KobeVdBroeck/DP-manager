@@ -69,7 +69,11 @@ namespace DP_manager.Components
             var res = form.GetResult();
 
             if (res != null)
+            {
                 Page = res.Value;
+                OnPageChanged(sender, e);
+            }
+                
         }
     }
 }

@@ -7,7 +7,7 @@
         public ArchiveController() : base()
         {
             getQueryBuilder = new QueryBuilder(STARTQUERY, "archive");
-            SetSort("Id", "asc");
+            SetSort("Timestamp", "desc");
         }
     }
 }
